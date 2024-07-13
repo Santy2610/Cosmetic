@@ -1,0 +1,40 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg bg-success" aria-label="Fifth navbar example">
+
+  <div class="container">
+    <a class="navbar-brand" href="/">Cosmetic</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05"
+      aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample05">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active position-relative" aria-current="page" href="indexalm">Almacen
+            <span class="position-absolute top-0.5 start-88 translate-middle badge rounded-pill bg-danger">
+              0
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Operaciones</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Reportes</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">reporte1</a></li>
+            <li><a class="dropdown-item" href="#">reporte2</a></li>
+            <li><a class="dropdown-item" href="#">REPORTE3</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <form role="search">
+        <input class="form-control" type="search" placeholder="Buscar" aria-label="Search">
+      </form>
+      {%include "temas.html"%}
+    </div>
+  </div>
+</nav>

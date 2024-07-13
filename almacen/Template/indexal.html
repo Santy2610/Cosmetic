@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+</head>
+{% load static %}
+<link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+<link href="{% static 'Icons/font/bootstrap-icons.min.css'%}" rel="stylesheet">
+
+<body>
+  {%include "barramenu.html"%}
+
+  <div class="container">
+    <div class="row mt-2">
+      <div class="col-2"></div>
+
+      <div class="col-4">
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+          aria-controls="offcanvasExample">
+          Adicionar producto
+        </button>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+          aria-labelledby="offcanvasExampleLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Nuevo producto</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <div>
+              Cuerpo del cambas
+            </div>
+            </p>
+            <button class="btn btn-primary" type="button" data-bs-dismiss="offcanvas">Cerrar</button>
+          </div>
+        </div>
+
+
+
+
+
+
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-2"></div>
+      <div class="col-8 bg-success">
+        <table>
+
+        </table>
+      </div>
+      <div class="col-2"></div>
+
+    </div>
+  </div>
+
+
+
+
+  <script src="{%static 'theme.js'%}"></script>
+  <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'color-modes.js'%}"></script>
+
+</body>
+
+</html>
