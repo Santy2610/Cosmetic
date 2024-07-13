@@ -6,3 +6,7 @@ from almacen.models import almacenb
 
 def indexalm(request):
     return render(request, "indexal.html")
+
+
+def indexinv(request):
+    return render(request, "indexinv.html")

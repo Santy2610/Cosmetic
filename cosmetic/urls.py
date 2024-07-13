@@ -16,13 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from cosmetic.views import principal
-from almacen.views import indexalm
+from almacen.views import indexalm, indexinv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', principal),
 
     path('indexalm', indexalm),
+    path('indexinv', indexinv),
 
 
 ]

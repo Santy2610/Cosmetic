@@ -3,7 +3,17 @@ from django.db import models
 # Create your models here.
 
 
+class inversion(models.Model):
+    fecha = models.DateField()
+    mes = models.CharField(max_length=2)
+    montoinver = models.FloatField()
+    montoganancia = models.FloatField()
+    libre = models.FloatField()
+
+
 class almacenb(models.Model):
+    idinver = models.ForeignKey(
+        inversion, on_delete=models.CASCADE, null=False, blank=False)
     descripcion = models.CharField(max_length=150)
     numinver = models.IntegerField()
     presioc = models.FloatField()
