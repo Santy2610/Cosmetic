@@ -23,23 +23,26 @@
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
           aria-labelledby="offcanvasExampleLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Nueva inversión</h5>
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Adicionar inversión</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
-          <div class="offcanvas-body">
-            <div>
-              Cuerpo del cambas
+          <form action="invadd" method="get">
+            <div class="offcanvas-body">
+              <hr>
+              <div>
+                Fecha de la inversion</p>
+                {{formSW.fechaf}}
+                </p>
+                Monto de la inversión</p>
+                {{formSW.montoinvf}}
+              </div>
+              </p>
+              <hr>
+              <input type="submit" class="btn btn-success" value="Guardar">
+              <button class="btn btn-primary" type="button" data-bs-dismiss="offcanvas">Cerrar</button>
             </div>
-            </p>
-            <button class="btn btn-primary" type="button" data-bs-dismiss="offcanvas">Cerrar</button>
-          </div>
+          </form>
         </div>
-
-
-
-
-
-
       </div>
     </div>
     <div class="row mt-2">
@@ -57,14 +60,46 @@
             </tr>
           </thead>
           <tbody>
+            {%for invertSW in invertSW%}
             <tr>
-              <td>Hola</td>
-              <td>Hola</td>
-              <td>Hola</td>
-              <td>Hola</td>
-              <td><a href="#" button type="button" class="btn btn-success btn-sm"><i class="bi bi-pencil"></i>
+              <td>{{invertSW.fecha}}</td>
+              <td>{{invertSW.montoinver}}</td>
+              <td>{{invertSW.montoganancia}}</td>
+              <td>{{invertSW.libre}}</td>
+              <td><button type="button" class="btn btn-success btn-sm" data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasedit" aria-controls="offcanvasedit"><i class="bi bi-pencil"></i></button>
+
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasedit"
+                  aria-labelledby="offcanvasExampleLabel">
+                  <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar inversión</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                      aria-label="Close"></button>
+                  </div>
+                  <form action="invupdate" method="get">
+                    <div class="offcanvas-body">
+                      <hr>
+                      <div>
+                        Fecha de la inversion</p>
+                        {{formSW.fechaf}}
+                        </p>
+                        Monto de la inversión</p>
+                        {{formSW.montoinvf}}
+                      </div>
+                      </p>
+                      <hr>
+                      <input type="submit" class="btn btn-success" value="Actualizar">
+                      <button class="btn btn-primary" type="button" data-bs-dismiss="offcanvas">Cerrar</button>
+                    </div>
+                  </form>
+                </div>
+
+
+
               <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                  data-bs-whatever="@mdo"><i class="bi bi-trash"></i></button></td>
+                  data-id={{invertSW.id}} data-fecha={{invertSW.fecha}} data-mes={{invertSW.mes}}
+                  data-year="{{yearSW}}"><i class="bi bi-trash"></i></button></td>
+
 
               <!-- Modal -->
 
@@ -76,22 +111,19 @@
                       <h5 class="modal-title" id="exampleModalLabel">Eliminar articulo</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="mb-3">
-                          <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                      </form>
+                    <div class="modal-body" id="modal-body">
+
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-danger">Eliminar</button>
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <div id="del"></div>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar</button>
                     </div>
                   </div>
                 </div>
               </div>
               <!-- Modal -->
             </tr>
+            {%endfor%}
           </tbody>
         </table>
       </div>
@@ -108,19 +140,22 @@
   <script>
     var exampleModal = document.getElementById('exampleModal')
     exampleModal.addEventListener('show.bs.modal', function (event) {
-      // Button that triggered the modal
       var button = event.relatedTarget
-      // Extract info from data-bs-* attributes
-      var recipient = button.getAttribute('data-bs-whatever')
-      // If necessary, you could initiate an AJAX request here
-      // and then do the updating in a callback.
-      //
-      // Update the modal's content.
+      var id = button.getAttribute('data-id')
+      var fecha = button.getAttribute('data-fecha')
+      var mes = button.getAttribute('data-mes')
+      var year = button.getAttribute('data-year')
+
       var modalTitle = exampleModal.querySelector('.modal-title')
-      var modalBodyInput = exampleModal.querySelector('.modal-body input')
+      var modalBody = exampleModal.querySelector('.modal-body')
+      var modalfooter = exampleModal.querySelector('.modal-footer')
 
       //modalTitle.textContent = 'New message to ' + recipient
-      modalBodyInput.value = recipient
+      modalTitle.textContent = "Eliminar inversión"
+      modalBody.textContent = 'Se dispone a eliminar la inversión con fecha (' + fecha + ' / ' + mes + ' / ' + year + ' )'
+      modalfooter.innerHTML = '<a href="/invdell/' + id + '" button type=button class="btn btn-danger">Eliminar</a>' + '<button type="button" class="btn btn-primary" data-bs-dismiss="modal"> Cerrar</button>'
+
+
     })
 
   </script>
