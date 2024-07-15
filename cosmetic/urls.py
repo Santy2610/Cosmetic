@@ -23,7 +23,7 @@ urlpatterns = [
     path('', principal),
 
     path('indexalm', indexalm),
-    path('indexinv', indexinv),
+    path('indexinv/<edit>/<dato>', indexinv),
     path('invadd', invadd),
     path('invdell/<dato>', invdell),
 

@@ -6,12 +6,20 @@ from datetime import datetime
 # Create your views here.
 
 
-def indexalm(request):
-    return render(request, "indexal.html")
+def indexalm(request, dato):
+    inver = inversion.objects.get(pk=dato)
+    alma = almacenb.objects.filter(idinver=inver).order_by('descripcion')
+
+    return render(request, "indexal.html", {"almaSW": alma, "inverSW": inver})
 
 
-def indexinv(request):
-    forminv = inversionf()
+def indexinv(request, edit, dato):
+    if edit == "edit":
+        invsel = inversion.objects.get(pk=dato)
+        forminv = inversionf(
+            initial={'fechaf': invsel.fecha,  'montoinvf': invsel.montoinver})
+    else:
+        forminv = inversionf()
     invert = inversion.objects.all()
     fecha1 = datetime.now()
     yearinv = fecha1.year

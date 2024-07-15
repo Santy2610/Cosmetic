@@ -14,120 +14,92 @@
     <div class="row mt-2">
       <div class="col-2"></div>
 
-      <div class="col-4">
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
-          aria-controls="offcanvasExample">
-          Nueva inversión
-        </button>
-
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
-          aria-labelledby="offcanvasExampleLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Adicionar inversión</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <form action="invadd" method="get">
-            <div class="offcanvas-body">
-              <hr>
-              <div>
-                Fecha de la inversion</p>
-                {{formSW.fechaf}}
-                </p>
-                Monto de la inversión</p>
-                {{formSW.montoinvf}}
-              </div>
-              </p>
-              <hr>
-              <input type="submit" class="btn btn-success" value="Guardar">
-              <button class="btn btn-primary" type="button" data-bs-dismiss="offcanvas">Cerrar</button>
-            </div>
-          </form>
-        </div>
-      </div>
     </div>
     <div class="row mt-2">
-      <div class="col-2"></div>
-      <div class="col-8">
-        <table class="table table-striped table-hover table-sm">
-          <thead class="thead-dark">
-            <tr>
-              <td>Fecha</td>
-              <td>$ Total inverción</td>
-              <td>$ Total venta</td>
-              <td>$ Ganancia</td>
-              <td></td>
-              <td></td>
-            </tr>
-          </thead>
-          <tbody>
-            {%for invertSW in invertSW%}
-            <tr>
-              <td>{{invertSW.fecha}}</td>
-              <td>{{invertSW.montoinver}}</td>
-              <td>{{invertSW.montoganancia}}</td>
-              <td>{{invertSW.libre}}</td>
-              <td><button type="button" class="btn btn-success btn-sm" data-bs-toggle="offcanvas"
-                  data-bs-target="#offcanvasedit" aria-controls="offcanvasedit"><i class="bi bi-pencil"></i></button>
-
-                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasedit"
-                  aria-labelledby="offcanvasExampleLabel">
-                  <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar inversión</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                      aria-label="Close"></button>
-                  </div>
-                  <form action="invupdate" method="get">
-                    <div class="offcanvas-body">
-                      <hr>
-                      <div>
-                        Fecha de la inversion</p>
-                        {{formSW.fechaf}}
-                        </p>
-                        Monto de la inversión</p>
-                        {{formSW.montoinvf}}
-                      </div>
-                      </p>
-                      <hr>
-                      <input type="submit" class="btn btn-success" value="Actualizar">
-                      <button class="btn btn-primary" type="button" data-bs-dismiss="offcanvas">Cerrar</button>
-                    </div>
-                  </form>
+      <div class="col-3">
+        <div class="card" style="width:270px">
+          <div class="card-body">
+            <form action="invadd" method="get">
+              <div class="offcanvas-body">
+                <hr>
+                <div>
+                  Fecha de la inversion</p>
+                  {{formSW.fechaf}}
+                  </p>
+                  Monto de la inversión</p>
+                  {{formSW.montoinvf}}
                 </div>
-
-
-
-              <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                  data-id={{invertSW.id}} data-fecha={{invertSW.fecha}} data-mes={{invertSW.mes}}
-                  data-year="{{yearSW}}"><i class="bi bi-trash"></i></button></td>
-
-
-              <!-- Modal -->
-
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Eliminar articulo</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" id="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                      <div id="del"></div>
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar</button>
-                    </div>
-                  </div>
-                </div>
+                </p>
+                <hr>
+                <input type="submit" class="btn btn-success" value="Guardar">
               </div>
-              <!-- Modal -->
-            </tr>
-            {%endfor%}
-          </tbody>
-        </table>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="col-2"></div>
+      <div class="col-8">
+        <div class="row">
+          <div class="card" style="width:800px">
+            <div class="card-body">
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="card" style="width:800px">
+            <div class="card-body">
+              <table class="table table-striped table-hover table-sm">
+                <thead class="thead-dark btn-danger">
+                  <tr>
+                    <td>Fecha de inicio</td>
+                    <td>$ Total inverción</td>
+                    <td>$ Total venta</td>
+                    <td>$ Ganancia</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%for invertSW in invertSW%}
+                  <tr>
+                    <td>{{invertSW.fecha}}</td>
+                    <td>{{invertSW.montoinver}}</td>
+                    <td>{{invertSW.montoganancia}}</td>
+                    <td>{{invertSW.libre}}</td>
+                    <td><button class="btn btn-info btn-sm"><i class="bi bi-list-stars"> Productos</i></button></td>
+                    <td><a href="/indexinv/edit/{{invertSW.id}}" button type="button" class="btn btn-success btn-sm"><i
+                          class="bi bi-pencil"></i></a>
+                    </td>
+                    <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        data-id={{invertSW.id}} data-fecha={{invertSW.fecha}} data-mes={{invertSW.mes}}
+                        data-year="{{yearSW}}"><i class="bi bi-trash"></i></button></td>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Eliminar articulo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body" id="modal-body">
+                          </div>
+                          <div class="modal-footer">
+                            <div id="del"></div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </tr>
+
+                  {%endfor%}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-1"></div>
 
     </div>
   </div>
@@ -159,6 +131,18 @@
     })
 
   </script>
+
+  <!-- <script>
+    const myOffcanvas = document.getElementById('offcanvasedit')
+    myOffcanvas.addEventListener('show.bs.offcanvas', event => {
+      var button = event.relatedTarget
+      var fecha = button.getAttribute('data-fecha')
+      var valor = button.getAttribute('data-valor')
+      document.getElementById('id_fechaf').value = fecha;
+      document.getElementById('id_montoinvf').value = valor;
+    })
+  </script>
+-->
 
 
 
