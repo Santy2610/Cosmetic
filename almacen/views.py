@@ -13,17 +13,25 @@ def indexalm(request, dato):
     return render(request, "indexal.html", {"almaSW": alma, "inverSW": inver})
 
 
+def indexalmtot(request):
+    inver = inversion.objects.all().order_by('fecha')
+    alma = almacenb.objects.all().order_by('descripcion')
+    return render(request, "indexal.html")
+
+
 def indexinv(request, edit, dato):
     if edit == "edit":
         invsel = inversion.objects.get(pk=dato)
         forminv = inversionf(
             initial={'fechaf': invsel.fecha,  'montoinvf': invsel.montoinver})
+        edit = "edit"
     else:
         forminv = inversionf()
-    invert = inversion.objects.all()
+        edit = "noedit"
+    invert = inversion.objects.all().order_by('fecha')
     fecha1 = datetime.now()
     yearinv = fecha1.year
-    return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv})
+    return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv, "editSW": edit, "datoSW": dato})
 
 
 def invadd(request):
@@ -35,15 +43,27 @@ def invadd(request):
     mesinv = fechar.month
     inv = inversion.objects.create(
         fecha=fecha, mes=mesinv, montoinver=montoinv, montoganancia=montogan, libre=libreinv)
-    return redirect(indexinv)
+    return redirect("/indexinv/index/0")
 
 
 def invupdate(request, dato):
     fecha = request.GET["fechaf"]
     montoinv = request.GET["montoinvf"]
+    montogan = 0
+    libreinv = 0
+    fechar = datetime.strptime(fecha, "%Y-%m-%d")
+    mesinv = fechar.month
+    inv = inversion.objects.get(pk=dato)
+    inv.fecha = fecha
+    inv.montoinver = montoinv
+    inv.montoganancia = montogan
+    inv.libre = libreinv
+    inv.mes = mesinv
+    inv.save()
+    return redirect("/indexinv/index/0")
 
 
 def invdell(request, dato):
     inv = inversion.objects.get(pk=dato)
     inv.delete()
-    return redirect(indexinv)
+    return redirect("/indexinv/index/0")

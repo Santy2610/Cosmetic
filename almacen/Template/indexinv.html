@@ -19,7 +19,8 @@
       <div class="col-3">
         <div class="card" style="width:270px">
           <div class="card-body">
-            <form action="invadd" method="get">
+            {%if editSW == "noedit" %}
+            <form action="/invadd" method="get">
               <div class="offcanvas-body">
                 <hr>
                 <div>
@@ -34,6 +35,24 @@
                 <input type="submit" class="btn btn-success" value="Guardar">
               </div>
             </form>
+            {%else%}
+            <form action="/invupdate/{{datoSW}}" method="get">
+              <div class="offcanvas-body">
+                <hr>
+                <div>
+                  Fecha de la inversion</p>
+                  {{formSW.fechaf}}
+                  </p>
+                  Monto de la inversión</p>
+                  {{formSW.montoinvf}}
+                </div>
+                </p>
+                <hr>
+                <input type="submit" class="btn btn-success" value="Actualizar">
+                <a href="/indexinv/noedit/0" button type="button" class="btn btn-info">Cancelar</a>
+              </div>
+            </form>
+            {%endif%}
           </div>
         </div>
       </div>

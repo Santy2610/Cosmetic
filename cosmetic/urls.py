@@ -16,15 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from cosmetic.views import principal
-from almacen.views import indexalm, indexinv, invadd, invdell
+from almacen.views import indexalm, indexalmtot, indexinv, invadd, invdell, invupdate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', principal),
 
     path('indexalm', indexalm),
+    path('indexalmtot', indexalmtot),
     path('indexinv/<edit>/<dato>', indexinv),
     path('invadd', invadd),
     path('invdell/<dato>', invdell),
-
+    path('invupdate/<dato>', invupdate),
 ]

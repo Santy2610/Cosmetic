@@ -1,0 +1,49 @@
+{% if paginador.num_pages > 1%}
+<div class="d-flex justify-content-center">
+    <ul class="pagination">
+        {% if listpsw.has_previous %}
+        <li class="page-item d-none d-sm-block"><a class="page-link"
+                href="?page={{ listpsw.previous_page_number }}#pagtable">Anterior</a></li>
+        {% endif %}
+        {% for page in paginador.page_range %}
+        {% if forloop.last and page != listpsw.number and paginador.num_pages > 5 %}
+        {% if listpsw.next_page_number != paginador.num_pages%}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ listpsw.number | add:1}}#pagtable">...</a>
+        </li>
+        {% endif %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ paginador.num_pages }}#pagtable32">{{paginador.num_pages}}</a>
+        </li>
+        {% endif %}
+        {% if page == listpsw.number and page > 5 %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page | add:-1 }}#pagtable">...</a>
+        </li>
+        {% endif %}
+        {% if page < 5 or page == listpsw.number %} <li
+            class="page-item {% if page == listpsw.number %}active{% endif %}">
+            <a class="page-link" href="?page={{ page }}#pagtable">{{ page }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+            {% if listpsw.has_next %}
+            <li class="page-item d-none d-sm-block">
+                <a class="page-link" href="?page={{ listpsw.next_page_number }}#pagtable">Siguiente</a>
+            </li>
+            {% endif %}
+    </ul>
+</div>
+<div class="d-flex justify-content-center d-sm-none">
+    {% if listpsw.has_previous %}
+    <span class="page-item"><a class="page-link"
+            href="?page={{ listpsw.previous_page_number }}#pagtable">Anterior</a></span>
+    {% endif %}
+    {% if listpsw.has_next %}
+    <span class="page-item"><a class="page-link"
+            href="?page={{ listpsw.next_page_number }}#pagtable">Siguiente</a></span>
+    {% endif %}
+    <br>
+    <br>
+</div>
+{% endif %}
