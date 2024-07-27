@@ -14,9 +14,9 @@ def indexalm(request, dato):
 
 
 def indexalmtot(request):
-    inver = inversion.objects.all().order_by('fecha')
-    alma = almacenb.objects.all().order_by('descripcion')
-    return render(request, "indexal.html")
+    inv = inversion.objects.all()
+    tot = inversion.almacenb_set
+    return render(request, "indexal.html", {"almaSW": tot})
 
 
 def indexinv(request, edit, dato):

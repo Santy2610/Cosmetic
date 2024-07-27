@@ -24,6 +24,7 @@ urlpatterns = [
 
     path('indexalm', indexalm),
     path('indexalmtot', indexalmtot),
+
     path('indexinv/<edit>/<dato>', indexinv),
     path('invadd', invadd),
     path('invdell/<dato>', invdell),
