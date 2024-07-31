@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', principal),
 
-    path('indexalm', indexalm),
+    path('indexalm/<edit>/<dato>/<valor>', indexalm),
     path('indexalmtot', indexalmtot),
 
     path('indexinv/<edit>/<dato>', indexinv),

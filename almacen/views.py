@@ -2,15 +2,29 @@ from django.shortcuts import render, redirect
 from almacen.models import almacenb, inversion
 from almacen.formulario import inversionf
 from datetime import datetime
+from django.core.paginator import Paginator
 
 # Create your views here.
 
 
-def indexalm(request, dato):
+def indexalm(request, edit, dato, valor):
     inver = inversion.objects.get(pk=dato)
+    page = request.GET.get('page', 1)
     alma = almacenb.objects.filter(idinver=inver).order_by('descripcion')
+    paginador = Paginator(alma, 10)
+    alma = paginador.page(page)
 
-    return render(request, "indexal.html", {"almaSW": alma, "inverSW": inver})
+    if edit == "edit":
+        alma = almacenb.objects.filter(
+            idinver=inver, pk=valor).order_by('descripcion')
+        formal = almacenf(initial={'descripcionf': alma.descripcion,
+                          'presiocf': alma.presioc, 'presiobf': alma.presiob, 'cantidadf': alma.cantidad})
+        return render(request, "indexal.html", {"almaSW": alma, "formalSW": formal, "inverSW": inver, "paginador": paginador, "listpsw": alma})
+    elif edit == "add":
+        formal = almacenf()
+        return render(request, "indexal.html", {"almaSW": alma, "formalSW": formal, "inverSW": inver, "paginador": paginador, "listpsw": alma})
+    else:
+        return render(request, "indexal.html", {"almaSW": alma, "inverSW": inver, "paginador": paginador, "listpsw": alma})
 
 
 def indexalmtot(request):
@@ -20,18 +34,29 @@ def indexalmtot(request):
 
 
 def indexinv(request, edit, dato):
+
+    page = request.GET.get('page', 1)
+    invert = inversion.objects.all().order_by('fecha')
+    paginador = Paginator(invert, 10)
+    invert = paginador.page(page)
+
+    fecha1 = datetime.now()
+    yearinv = fecha1.year
+
     if edit == "edit":
         invsel = inversion.objects.get(pk=dato)
         forminv = inversionf(
             initial={'fechaf': invsel.fecha,  'montoinvf': invsel.montoinver})
         edit = "edit"
+        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv, "editSW": edit, "datoSW": dato, "invuSW": invsel, "paginador": paginador, "listpsw": invert})
+    elif edit == "add":
+        forminv = inversionf()
+        edit = "add"
+        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv, "editSW": edit, "datoSW": dato, "paginador": paginador, "listpsw": invert})
     else:
         forminv = inversionf()
         edit = "noedit"
-    invert = inversion.objects.all().order_by('fecha')
-    fecha1 = datetime.now()
-    yearinv = fecha1.year
-    return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv, "editSW": edit, "datoSW": dato})
+        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv, "editSW": edit, "datoSW": dato, "paginador": paginador, "listpsw": invert})
 
 
 def invadd(request):
