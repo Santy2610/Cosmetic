@@ -15,8 +15,8 @@ class almacenb(models.Model):
     idinver = models.ForeignKey(
         inversion, on_delete=models.CASCADE, null=False, blank=False)
     descripcion = models.CharField(max_length=150)
-    numinver = models.IntegerField()
     presioc = models.FloatField()
     presiob = models.FloatField()
     ganancia = models.FloatField()
     cantidad = models.IntegerField()
+    existencia = models.IntegerField()

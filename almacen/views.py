@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from almacen.models import almacenb, inversion
-from almacen.formulario import inversionf
+from almacen.formulario import inversionf, almacenf
 from datetime import datetime
 from django.core.paginator import Paginator
 
@@ -11,20 +11,43 @@ def indexalm(request, edit, dato, valor):
     inver = inversion.objects.get(pk=dato)
     page = request.GET.get('page', 1)
     alma = almacenb.objects.filter(idinver=inver).order_by('descripcion')
-    paginador = Paginator(alma, 10)
+    paginador = Paginator(alma, 6)
     alma = paginador.page(page)
 
     if edit == "edit":
-        alma = almacenb.objects.filter(
-            idinver=inver, pk=valor).order_by('descripcion')
-        formal = almacenf(initial={'descripcionf': alma.descripcion,
-                          'presiocf': alma.presioc, 'presiobf': alma.presiob, 'cantidadf': alma.cantidad})
-        return render(request, "indexal.html", {"almaSW": alma, "formalSW": formal, "inverSW": inver, "paginador": paginador, "listpsw": alma})
-    elif edit == "add":
-        formal = almacenf()
-        return render(request, "indexal.html", {"almaSW": alma, "formalSW": formal, "inverSW": inver, "paginador": paginador, "listpsw": alma})
+        almaf = almacenb.objects.get(pk=valor)
+        formal = almacenf(initial={'descripcionf': almaf.descripcion,
+                          'presiocf': almaf.presioc, 'presiobf': almaf.presiob, 'cantidadf': almaf.cantidad})
+        return render(request, "indexal.html", {"almaSW": alma, "formalSW": formal, "inverSW": inver, "paginador": paginador, "listpsw": alma, "editSW": edit, "invcontSW": dato})
     else:
-        return render(request, "indexal.html", {"almaSW": alma, "inverSW": inver, "paginador": paginador, "listpsw": alma})
+        formal = almacenf()
+        return render(request, "indexal.html", {"almaSW": alma, "formalSW": formal, "inverSW": inver, "paginador": paginador, "listpsw": alma, "editSW": edit, "invcontSW": dato})
+
+
+def almadd(request, dato):
+    inv = inversion.objects.get(pk=dato)
+    descripc = request.GET["descripcionf"]
+    presv = request.GET["presiobf"]
+    presc = request.GET["presiocf"]
+    cant = request.GET["cantidadf"]
+    gana = float(presv)*int(cant)
+
+    alma = almacenb.objects.create(
+        idinver=inv, descripcion=descripc, presiob=presv, presioc=presc, cantidad=cant, ganancia=gana, existencia=cant)
+    inv.montoganancia = inv.montoganancia+gana
+    inv.libre = inv.montoganancia-inv.montoinver
+    inv.save()
+    return redirect("/indexalm/noedit/"+dato+"/0")
+
+
+def almadel(request, dato, id):
+    alma = almacenb.objects.get(pk=id)
+    inv = inversion.objects.get(pk=dato)
+    inv.montoganancia = inv.montoganancia-alma.ganancia
+    inv.libre = inv.montoganancia-inv.montoinver
+    inv.save()
+    alma.delete()
+    return redirect("/indexalm/noedit/"+dato+"/0")
 
 
 def indexalmtot(request):

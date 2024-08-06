@@ -17,22 +17,92 @@
       <div class="col-9">
         <div class="card" style="width:900px">
           <div class="card-body">
-            <div class="row">
-              <div class="col-4">
-                <button class="btn btn-primary" type="button">Adicionar producto</button>
+            {%if editSW == "edit"%}
+            <form class="form-inline" action="#" method="get">
+              <div class=" row">
+                <div class="col-6">
+                  <label for="descripcion">Articulo:</label>
+                  {{formalSW.descripcionf}}
+                </div>
+                <div class="col-2">
+                  <label for="cantidad">Cantidad:</label>
+                  {{formalSW.cantidadf}}
+                </div>
+                <div class="col-2">
+                  <label for="compra">P.de compra:</label>
+                  {{formalSW.presiocf}}
+                </div>
+                <div class="col-2">
+                  <label for="venta">P.de venta:</label>
+                  {{formalSW.presiobf}}
+                </div>
               </div>
-              <div class="col-5">
+              <div class="row mt-2">
+                <div class="col-4 float-left">
+                  <input type="submit" class="btn btn-success btn-sm float-rigth" value="  Editar  ">
+                  <a href="/indexalm/noedit/{{invcontSW}}/0" button
+                    class="btn btn-danger btn-sm float-rigth">Cancelar</a>
+                </div>
+              </div>
+            </form>
+            {%else%}
+            <form class="form-inline" action="/almadd/{{invcontSW}}" method="get">
+              <div class=" row">
+                <div class="col-6">
+                  <label for="descripcion">Articulo:</label>
+                  {{formalSW.descripcionf}} <a href="#" button type="button" class="btn btn-primary btn-sm"><i
+                      class="bi bi-search"></i></a>
+                </div>
+                <div class="col-2">
+                  <label for="cantidad">Cantidad:</label>
+                  {{formalSW.cantidadf}}
+                </div>
+                <div class="col-2">
+                  <label for="compra">$.de compra:</label>
+                  {{formalSW.presiocf}}
+                </div>
+                <div class="col-2">
+                  <label for="venta">$.de venta:</label>
+                  {{formalSW.presiobf}}
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-4 float-left">
+                  <input type="submit" class="btn btn-success btn-sm float-rigth" value=" Adicionar ">
+                  <a href="/indexalm/noedit/{{invcontSW}}/0" button
+                    class="btn btn-danger btn-sm float-rigth">Cancelar</a>
+                </div>
 
               </div>
-              <div class="col-3 mt-2">
-                {{inverSW.fecha}}
+
+            </form>
+            {%endif%}
+          </div>
+        </div>
+      </div>
+      <div class="col-1"></div>
+    </div>
+
+    <div class="row mt-1">
+      <div class="col-1"></div>
+
+      <div class="col-9">
+        <div class="card" style="width:900px">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-8">
+                {%include "paginador.html"%}
+              </div>
+              <div class="col-4 mt-1">
+                <h4>{{inverSW.fecha}}</h4>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="row mt-2">
+
+    <div class="row mt-1">
       <div class="col-1"></div>
       <div class="col-10">
         <div class="card" style="width:900px">
@@ -42,21 +112,24 @@
                 <tr>
                   <td class="col-6">Articulo</td>
                   <td>Cantidad</td>
-                  <td>Pr. de compra</td>
-                  <td>Pr. de venta</td>
+                  <td>$. de compra</td>
+                  <td>$. de venta</td>
                   <td></td>
                   <td></td>
                 </tr>
               </thead>
               <tbody>
+                {%for almaSW in almaSW%}
                 <tr>
-                  <td>Hola</td>
-                  <td class="">Hola</td>
-                  <td class="">Hola</td>
-                  <td class="">Hola</td>
-                  <td><a href="#" button type="button" class="btn btn-success btn-sm"><i class="bi bi-pencil"></i>
+                  <td class="">{{almaSW.descripcion}}</td>
+                  <td class="">{{almaSW.cantidad}}</td>
+                  <td class="">{{almaSW.presioc}}</td>
+                  <td class="">{{almaSW.presiob}}</td>
+                  <td><a href="/indexalm/edit/{{invcontSW}}/{{almaSW.id}}" button type="button"
+                      class="btn btn-success btn-sm"><i class="bi bi-pencil"></i></a>
                   <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                      data-bs-whatever="@mdo"><i class="bi bi-trash"></i></button></td>
+                      data-inv={{invcontSW}} data-id={{almaSW.id}} data-des={{almaSW.descripcion}}><i
+                        class="bi bi-trash"></i></button></td>
 
                   <!-- Modal -->
 
@@ -65,25 +138,20 @@
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Eliminar articulo</h5>
+                          <h5 class="modal-title" id="exampleModalLabel">SED</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form>
-                            <div class="mb-3">
-                              <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                          </form>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-danger">Eliminar</button>
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
                         </div>
                       </div>
                     </div>
                   </div>
                   <!-- Modal -->
                 </tr>
+                {%endfor%}
               </tbody>
             </table>
           </div>
@@ -104,17 +172,19 @@
     exampleModal.addEventListener('show.bs.modal', function (event) {
       // Button that triggered the modal
       var button = event.relatedTarget
-      // Extract info from data-bs-* attributes
-      var recipient = button.getAttribute('data-bs-whatever')
-      // If necessary, you could initiate an AJAX request here
-      // and then do the updating in a callback.
-      //
-      // Update the modal's content.
-      var modalTitle = exampleModal.querySelector('.modal-title')
-      var modalBodyInput = exampleModal.querySelector('.modal-body input')
 
-      //modalTitle.textContent = 'New message to ' + recipient
-      modalBodyInput.value = recipient
+      var id = button.getAttribute('data-id')
+      var inver = button.getAttribute('data-inv')
+      var descrip = button.getAttribute('data-des')
+
+      var modalTitle = exampleModal.querySelector('.modal-title')
+      var modalBody = exampleModal.querySelector('.modal-body')
+      var modalfooter = exampleModal.querySelector('.modal-footer')
+
+
+      modalTitle.textContent = "Eliminar articulo"
+      modalBody.textContent = 'Se dispone a eliminar el articulo: ' + descrip
+      modalfooter.innerHTML = '<a href="/almadel/' + inver + '/' + id + '" button type=button class="btn btn-danger">Eliminar</a>' + '<button type="button" class="btn btn-primary" data-bs-dismiss="modal"> Cerrar</button>'
     })
 
   </script>

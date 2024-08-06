@@ -4,8 +4,8 @@ from almacen.models import almacenb, inversion
 
 
 class almacenbAdmin(admin.ModelAdmin):
-    list_display = ("descripcion", "numinver", "presioc",
-                    "presiob", "ganancia", "cantidad")
+    list_display = ("descripcion", "presioc",
+                    "presiob", "ganancia", "cantidad", "existencia")
 
 
 class inverAdmin(admin.ModelAdmin):
