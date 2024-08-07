@@ -3,25 +3,21 @@ from almacen.models import almacenb, inversion
 from almacen.formulario import inversionf, almacenf
 from datetime import datetime
 from django.core.paginator import Paginator
+from django.db.models import Sum
 
 # Create your views here.
 
 
-def indexalm(request, edit, dato, valor):
+def indexalm(request, dato, valor):
     inver = inversion.objects.get(pk=dato)
     page = request.GET.get('page', 1)
     alma = almacenb.objects.filter(idinver=inver).order_by('descripcion')
-    paginador = Paginator(alma, 6)
+    paginador = Paginator(alma, 7)
     alma = paginador.page(page)
-
-    if edit == "edit":
-        almaf = almacenb.objects.get(pk=valor)
-        formal = almacenf(initial={'descripcionf': almaf.descripcion,
-                          'presiocf': almaf.presioc, 'presiobf': almaf.presiob, 'cantidadf': almaf.cantidad})
-        return render(request, "indexal.html", {"almaSW": alma, "formalSW": formal, "inverSW": inver, "paginador": paginador, "listpsw": alma, "editSW": edit, "invcontSW": dato})
-    else:
-        formal = almacenf()
-        return render(request, "indexal.html", {"almaSW": alma, "formalSW": formal, "inverSW": inver, "paginador": paginador, "listpsw": alma, "editSW": edit, "invcontSW": dato})
+    listado = almacenb.objects.values('descripcion').order_by(
+        'descripcion').annotate(sun=Sum('cantidad'))
+    formal = almacenf()
+    return render(request, "indexal.html", {"almaSW": alma, "formalSW": formal, "inverSW": inver, "paginador": paginador, "listpsw": alma, "invcontSW": dato, "listadoSW": listado})
 
 
 def almadd(request, dato):
@@ -37,7 +33,7 @@ def almadd(request, dato):
     inv.montoganancia = inv.montoganancia+gana
     inv.libre = inv.montoganancia-inv.montoinver
     inv.save()
-    return redirect("/indexalm/noedit/"+dato+"/0")
+    return redirect("/indexalm/"+dato+"/0")
 
 
 def almadel(request, dato, id):
@@ -47,7 +43,7 @@ def almadel(request, dato, id):
     inv.libre = inv.montoganancia-inv.montoinver
     inv.save()
     alma.delete()
-    return redirect("/indexalm/noedit/"+dato+"/0")
+    return redirect("/indexalm/"+dato+"/0")
 
 
 def indexalmtot(request):
