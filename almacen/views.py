@@ -4,6 +4,7 @@ from almacen.formulario import inversionf, almacenf
 from datetime import datetime
 from django.core.paginator import Paginator
 from django.db.models import Sum
+from cosmetic.views import cantalm
 
 # Create your views here.
 
@@ -17,7 +18,7 @@ def indexalm(request, dato, valor):
     listado = almacenb.objects.values('descripcion').order_by(
         'descripcion').annotate(sun=Sum('cantidad'))
     formal = almacenf()
-    return render(request, "indexal.html", {"almaSW": alma, "formalSW": formal, "inverSW": inver, "paginador": paginador, "listpsw": alma, "invcontSW": dato, "listadoSW": listado})
+    return render(request, "indexal.html", {"almaSW": alma, "formalSW": formal, "inverSW": inver, "paginador": paginador, "listpsw": alma, "invcontSW": dato, "listadoSW": listado, "conal": cantalm})
 
 
 def almadd(request, dato):
@@ -46,10 +47,25 @@ def almadel(request, dato, id):
     return redirect("/indexalm/"+dato+"/0")
 
 
-def indexalmtot(request):
-    inv = inversion.objects.all()
-    tot = inversion.almacenb_set
-    return render(request, "indexal.html", {"almaSW": tot})
+def listalmacen(request):
+    resul = []
+    inv = inversion.objects.all().order_by('fecha')
+    for inv in inv:
+        alm = almacenb.objects.filter(
+            idinver=inv).order_by('descripcion')
+        for alm in alm:
+            if alm.existencia > 0:
+                resul.append({
+                    'fecha': inv.fecha,
+                    'descripcion': alm.descripcion,
+                    'existencia': alm.existencia
+                })
+
+    page = request.GET.get('page', 1)
+    paginador = Paginator(resul, 12)
+    resul = paginador.page(page)
+
+    return render(request, "listalmacen.html", {"resultSW": resul, "paginador": paginador, "listpsw": resul, "conal": cantalm})
 
 
 def indexinv(request, edit, dato):
@@ -67,15 +83,15 @@ def indexinv(request, edit, dato):
         forminv = inversionf(
             initial={'fechaf': invsel.fecha,  'montoinvf': invsel.montoinver})
         edit = "edit"
-        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv, "editSW": edit, "datoSW": dato, "invuSW": invsel, "paginador": paginador, "listpsw": invert})
+        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv, "editSW": edit, "datoSW": dato, "invuSW": invsel, "paginador": paginador, "listpsw": invert, "conal": cantalm})
     elif edit == "add":
         forminv = inversionf()
         edit = "add"
-        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv, "editSW": edit, "datoSW": dato, "paginador": paginador, "listpsw": invert})
+        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv, "editSW": edit, "datoSW": dato, "paginador": paginador, "listpsw": invert, "conal": cantalm})
     else:
         forminv = inversionf()
         edit = "noedit"
-        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv, "editSW": edit, "datoSW": dato, "paginador": paginador, "listpsw": invert})
+        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv, "editSW": edit, "datoSW": dato, "paginador": paginador, "listpsw": invert, "conal": cantalm})
 
 
 def invadd(request):

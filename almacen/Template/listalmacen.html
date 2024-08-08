@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+</head>
+{% load static %}
+<link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+<link href="{% static 'Icons/font/bootstrap-icons.min.css'%}" rel="stylesheet">
+
+<body>
+  {%include "barramenu.html"%}
+
+  <div class="container">
+    <div class="row mt-2">
+      <div class="col-1"></div>
+
+
+      <div class="col-9">
+        <div class="card" style="width:900px">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-5">
+                <h3>Existencia en almacen</h3>
+              </div>
+              <div class="col-7">
+                {%include "paginador.html"%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-1">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <div class="card" style="width:900px">
+          <div class="card-body">
+            <table class="table table-striped table-hover table-sm">
+              <thead class="thead-dark">
+                <tr>
+                  <td class="col-3">Inversión</td>
+                  <td class="col-7">Articulo</td>
+                  <td class="text-center">Existencia</td>
+                </tr>
+              </thead>
+              <tbody>
+                {%for resultSW in resultSW%}
+                <tr>
+                  <td class="">{{resultSW.fecha}}</td>
+                  <td class="">{{resultSW.descripcion}}</td>
+                  <td class="text-center">{{resultSW.existencia}}</td>
+
+                </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-1"></div>
+
+    </div>
+  </div>
+
+  <script src="{%static 'theme.js'%}"></script>
+  <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'color-modes.js'%}"></script>
+
+
+</body>
+
+</html>

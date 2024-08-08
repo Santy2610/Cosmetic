@@ -3,7 +3,8 @@
 
   <div class="container">
     <a class="navbar-brand" href="/">
-      <img src="{% static '/file.jpeg'%}" width="30" height="30" class="d-inline-block align-top" alt=""> Cosmetic</a>
+      <img src="{% static '/file.jpeg'%}" width="30" height="30" class="d-inline-block align-top rounded-circle" alt="">
+      Cosmetic</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05"
       aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -15,9 +16,9 @@
           <a class="nav-link active" aria-current="page" href="/indexinv/noedit/0">Inversiones</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active position-relative" aria-current="page" href="/indexalmtot">Almacen
+          <a class="nav-link active position-relative" aria-current="page" href="/listalmacen">Almacen
             <span class="position-absolute top-0.5 start-88 translate-middle badge rounded-pill bg-danger">
-              0
+              {{conal}}
               <span class="visually-hidden">unread messages</span>
             </span>
           </a>

@@ -27,7 +27,7 @@
 
                   <div class="modal fade" id="listado" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="exampleModalLabel">Listado de árticulos</h5>
@@ -96,7 +96,7 @@
                 {%include "paginador.html"%}
               </div>
               <div class="col-4 mt-1">
-                <h4>{{inverSW.fecha}}</h4>
+                <h3>{{inverSW.fecha}}</h3>
               </div>
             </div>
           </div>
@@ -127,7 +127,7 @@
                   <td class="">{{almaSW.presioc}}</td>
                   <td class="">{{almaSW.presiob}}</td>
                   <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                      data-inv={{invcontSW}} data-id={{almaSW.id}} data-des={{almaSW.descripcion}}><i
+                      data-inv={{invcontSW}} data-id={{almaSW.id}} data-des='{{almaSW.descripcion}}'><i
                         class="bi bi-trash"></i></button></td>
 
                   <!-- Modal -->
@@ -182,7 +182,7 @@
 
 
       modalTitle.textContent = "Eliminar articulo"
-      modalBody.textContent = 'Se dispone a eliminar el articulo: ' + descrip
+      modalBody.textContent = 'Decea eliminar el articulo: ' + descrip
       modalfooter.innerHTML = '<a href="/almadel/' + inver + '/' + id + '" button type=button class="btn btn-danger">Eliminar</a>' + '<button type="button" class="btn btn-primary" data-bs-dismiss="modal"> Cerrar</button>'
     })
 
