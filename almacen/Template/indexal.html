@@ -8,9 +8,10 @@
 <link href="{% static 'Icons/font/bootstrap-icons.min.css'%}" rel="stylesheet">
 
 <body>
-  {%include "barramenu.html"%}
+
 
   <div class="container">
+    {%include "barramenu.html"%}
     <div class="row mt-2">
       <div class="col-1"></div>
 
@@ -183,7 +184,7 @@
 
       modalTitle.textContent = "Eliminar articulo"
       modalBody.textContent = 'Decea eliminar el articulo: ' + descrip
-      modalfooter.innerHTML = '<a href="/almadel/' + inver + '/' + id + '" button type=button class="btn btn-danger">Eliminar</a>' + '<button type="button" class="btn btn-primary" data-bs-dismiss="modal"> Cerrar</button>'
+      modalfooter.innerHTML = '<a href="/almadel/' + inver + '/' + id + '" button type=button class="btn btn-danger">Eliminar</a>' + '<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>'
     })
 
   </script>

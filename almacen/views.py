@@ -75,23 +75,23 @@ def indexinv(request, edit, dato):
     paginador = Paginator(invert, 10)
     invert = paginador.page(page)
 
-    fecha1 = datetime.now()
-    yearinv = fecha1.year
+    # fecha1 = datetime.now()
+    # yearinv = fecha1.year
 
     if edit == "edit":
         invsel = inversion.objects.get(pk=dato)
         forminv = inversionf(
             initial={'fechaf': invsel.fecha,  'montoinvf': invsel.montoinver})
         edit = "edit"
-        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv, "editSW": edit, "datoSW": dato, "invuSW": invsel, "paginador": paginador, "listpsw": invert, "conal": cantalm})
+        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "editSW": edit, "datoSW": dato, "invuSW": invsel, "paginador": paginador, "listpsw": invert, "conal": cantalm})
     elif edit == "add":
         forminv = inversionf()
         edit = "add"
-        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv, "editSW": edit, "datoSW": dato, "paginador": paginador, "listpsw": invert, "conal": cantalm})
+        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "editSW": edit, "datoSW": dato, "paginador": paginador, "listpsw": invert, "conal": cantalm})
     else:
         forminv = inversionf()
         edit = "noedit"
-        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "yearSW": yearinv, "editSW": edit, "datoSW": dato, "paginador": paginador, "listpsw": invert, "conal": cantalm})
+        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "editSW": edit, "datoSW": dato, "paginador": paginador, "listpsw": invert, "conal": cantalm})
 
 
 def invadd(request):

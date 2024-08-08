@@ -2,16 +2,17 @@
 <html lang="es">
 
 <head>
-  <title>Listado de inversiones</title>
+  <title>Inversiones</title>
 </head>
 {% load static %}
 <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
 <link href="{% static 'Icons/font/bootstrap-icons.min.css'%}" rel="stylesheet">
 
 <body>
-  {%include "barramenu.html"%}
+
 
   <div class="container">
+    {%include "barramenu.html"%}
     <div class="container">
       <div class="container">
         {%if editSW == "noedit"%}
@@ -21,11 +22,11 @@
             <div class="card" style="width:900px">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-4">
+                  <div class="col-5">
                     <a href="/indexinv/add/0" button class="btn btn-primary" type="button">Adicionar
                       Inversión</a>
                   </div>
-                  <div class="col-5">
+                  <div class="col-7">
                     {%include "paginador.html"%}
                   </div>
                 </div>
@@ -37,7 +38,7 @@
         {%endif%}
 
         {%if editSW == "add" %}
-        <div class="row mt-2">
+        <div class="row mt-1">
           <div class="col-1"></div>
           <div class="col-9">
             <div class="card" style="width:900px">
@@ -67,7 +68,7 @@
           <div class="col-1"></div>
         </div>
         {%elif editSW == "edit" %}
-        <div class="row mt-2">
+        <div class="row mt-1">
           <div class="col-1"></div>
           <div class="col-9">
             <div class="card" style="width:900px">
@@ -99,7 +100,7 @@
 
         {%endif%}
 
-        <div class="row mt-2">
+        <div class="row mt-1">
           <div class="col-1"></div>
           <div class="col-9">
             <div class="card" style="width:900px">
@@ -132,8 +133,7 @@
                           class="btn btn-success btn-sm"><i class="bi bi-pencil"></i></a>
                       </td>
                       <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                          data-id={{invertSW.id}} data-fecha={{invertSW.fecha}} data-mes={{invertSW.mes}}
-                          data-year="{{yearSW}}"><i class="bi bi-trash"></i></button>
+                          data-id={{invertSW.id}} data-fecha="{{invertSW.fecha}}"><i class="bi bi-trash"></i></button>
                       </td>
                       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
@@ -182,8 +182,6 @@
       var button = event.relatedTarget
       var id = button.getAttribute('data-id')
       var fecha = button.getAttribute('data-fecha')
-      var mes = button.getAttribute('data-mes')
-      var year = button.getAttribute('data-year')
 
       var modalTitle = exampleModal.querySelector('.modal-title')
       var modalBody = exampleModal.querySelector('.modal-body')
@@ -191,8 +189,8 @@
 
       //modalTitle.textContent = 'New message to ' + recipient
       modalTitle.textContent = 'Eliminar articulo'
-      modalBody.textContent = 'Se dispone a eliminar la inversión con fecha (' + fecha + ' / ' + mes + ' / ' + year + ' )'
-      modalfooter.innerHTML = '<a href="/invdell/' + id + '" button type=button class="btn btn-danger">Eliminar</a>' + '<button type="button" class="btn btn-primary" data-bs-dismiss="modal"> Cerrar</button>'
+      modalBody.textContent = 'Se dispone a eliminar la inversión con fecha : ' + fecha
+      modalfooter.innerHTML = '<a href="/invdell/' + id + '" button type=button class="btn btn-danger">Eliminar</a>' + '<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>'
 
 
     })
