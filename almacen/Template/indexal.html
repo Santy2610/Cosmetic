@@ -111,48 +111,63 @@
         <div class="card" style="width:900px">
           <div class="card-body">
             <table class="table table-striped table-hover table-sm">
-              <thead class="thead-dark">
-                <tr>
-                  <td class="col-6">Articulo</td>
-                  <td>Cantidad</td>
-                  <td>$. de compra</td>
-                  <td>$. de venta</td>
-                  <td></td>
-                </tr>
-              </thead>
-              <tbody>
-                {%for almaSW in almaSW%}
-                <tr>
-                  <td class="">{{almaSW.descripcion}}</td>
-                  <td class="">{{almaSW.cantidad}}</td>
-                  <td class="">{{almaSW.presioc}}</td>
-                  <td class="">{{almaSW.presiob}}</td>
-                  <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                      data-inv={{invcontSW}} data-id={{almaSW.id}} data-des='{{almaSW.descripcion}}'><i
-                        class="bi bi-trash"></i></button></td>
+              <tr>
+                <td>
+                  <table>
+                    <thead class="thead-dark">
+                      <tr>
+                        <td width="410">Articulo</td>
+                        <td width="95">Cantidad</td>
+                        <td width="110">$. de compra</td>
+                        <td>$. de venta</td>
+                        <td></td>
+                      </tr>
+                    </thead>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="width:855px; height:260px; overflow:auto;">
+                    <table class="table table-striped table-hover table-sm">
+                      <tbody>
+                        {%for almaSW in almaSW%}
+                        <tr>
+                          <td width="410">{{almaSW.descripcion}}</td>
+                          <td width="95">{{almaSW.cantidad}}</td>
+                          <td width="110">{{almaSW.presioc}}</td>
+                          <td class="">{{almaSW.presiob}}</td>
+                          <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                              data-bs-target="#exampleModal" data-inv={{invcontSW}} data-id={{almaSW.id}}
+                              data-des='{{almaSW.descripcion}}'><i class="bi bi-trash"></i></button></td>
 
-                  <!-- Modal -->
+                          <!-- Modal -->
 
-                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">SED</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                        </div>
-                        <div class="modal-footer">
+                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">SED</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                </div>
+                                <div class="modal-footer">
 
-                        </div>
-                      </div>
-                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Modal -->
+                        </tr>
+                        {%endfor%}
+                      </tbody>
+                    </table>
                   </div>
-                  <!-- Modal -->
-                </tr>
-                {%endfor%}
-              </tbody>
+                </td>
+              </tr>
             </table>
           </div>
         </div>

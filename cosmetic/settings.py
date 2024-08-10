@@ -57,6 +57,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'cosmetic/Template',
+                 BASE_DIR / 'gestion/Template',
                  BASE_DIR / 'almacen/Template',],
         'APP_DIRS': True,
         'OPTIONS': {
