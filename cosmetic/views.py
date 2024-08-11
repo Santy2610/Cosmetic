@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from almacen.models import almacenb
 from django.db.models import Sum
+from gestion.formulario import vistvent
 
 
 def cantalm():
@@ -13,4 +14,5 @@ def cantalm():
 
 
 def principal(request):
+
     return render(request, "index.html", {"conal": cantalm})
