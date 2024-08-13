@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from cosmetic.views import principal
 from almacen.views import indexalm, indexinv, invadd, invdell, invupdate, almadd, almadel, listalmacen
-from gestion.views import indexventa
+from gestion.views import indexventa, addventa
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,4 +34,5 @@ urlpatterns = [
     path('invupdate/<dato>', invupdate),
 
     path('indexventa', indexventa),
+    path('addventa/<fechar>/<id>', addventa),
 ]

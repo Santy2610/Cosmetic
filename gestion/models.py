@@ -8,3 +8,4 @@ class venta(models.Model):
     descripcion = models.CharField(max_length=150)
     cantidad = models.IntegerField()
     ganancia = models.FloatField()
+    idalma = models.IntegerField()
