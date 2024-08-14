@@ -58,8 +58,9 @@
                       <table>
                         <thead class="thead-dark btn-danger">
                           <tr>
-                            <td width="720">Producto vendido</td>
-                            <td width="130">Cantidad</td>
+                            <td width="650">Producto vendido</td>
+                            <td width="150">Cantidad</td>
+                            <td></td>
                           </tr>
                         </thead>
                       </table>
@@ -71,8 +72,11 @@
                         <tbody>
                           {%for venSW in venSW%}
                           <tr>
-                            <td>{{venSW.descripcion}}</td>
-                            <td>{{venSW.tot}} {{venSW.idalma}}</td>
+                            <td width="780">{{venSW.descripcion}}</td>
+                            <td width="90">{{venSW.tot}} <!--{{venSW.idalma}}--></td>
+                            <td><a href="#" button type=button class="btn btn-warning btn-sm"><i
+                                  class="bi bi-arrow-right-circle"></i></a>
+                            </td>
                           </tr>
                           {%endfor%}
                         </tbody>
@@ -108,7 +112,7 @@
                             {%for almaSW in almaSW%}
                             <tr>
                               <td><a href="/addventa/{{yearSW}}-{{mesSW}}-{{diaSW}}/{{almaSW.id}}" button type=button
-                                  class="btn btn-primary btn-sm"><i class="bi bi-arrow-left-circle"></i></a>
+                                  class="btn btn-success btn-sm"><i class="bi bi-arrow-left-circle"></i></a>
                               </td>
                               <td width="500">{{almaSW.descripcion}}</td>
                               <td width="90">{{almaSW.existencia}}</td>

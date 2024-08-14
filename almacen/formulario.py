@@ -9,7 +9,7 @@ class inversionf(forms.Form):
 
 class almacenf(forms.Form):
     descripcionf = forms.CharField(
-        widget=forms.TextInput(attrs={'size': '32'}))
+        widget=forms.TextInput(attrs={'size': '28'}))
     presiocf = forms.FloatField(widget=forms.TextInput(attrs={'size': '5'}))
     presiobf = forms.FloatField(widget=forms.TextInput(attrs={'size': '5'}))
     cantidadf = forms.IntegerField(
