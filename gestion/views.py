@@ -37,3 +37,15 @@ def addventa(request, fechar, id):
     alma.save()
     ven.save()
     return redirect("/indexventa?calef="+fechar)
+
+
+def dismventa(request, fechar, id):
+    vent = venta.objects.filter(idalma=id).all()
+    for vent in vent:
+        loc = vent.id
+    tra = venta.objects.get(pk=loc)
+    tra.delete()
+    alm = almacenb.objects.get(pk=id)
+    alm.existencia = alm.existencia+1
+    alm.save()
+    return redirect("/indexventa?calef="+fechar)
