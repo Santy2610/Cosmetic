@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from cosmetic.views import principal
-from almacen.views import indexalm, indexinv, invadd, invdell, invupdate, almadd, almadel, listalmacen
+from almacen.views import indexalm, indexinv, invadd, invdell, invupdate, almadd, almadel, listalmacen, cal, invt
 from gestion.views import indexventa, addventa, dismventa
 
 urlpatterns = [
@@ -27,6 +27,8 @@ urlpatterns = [
     path('almadd/<dato>', almadd),
     path('almadel/<dato>/<id>', almadel),
     path('listalmacen', listalmacen),
+    path('cal', cal),
+    path('invt', invt),
 
     path('indexinv/<edit>/<dato>', indexinv),
     path('invadd', invadd),

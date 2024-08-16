@@ -46,10 +46,6 @@
                       <label for="fecha">Fecha:</label>
                       {{formSW.fechaf}}
                     </div>
-                    <div class="col-3 mt-1">
-                      <label for="fecha">Monto inversión:</label>
-                      {{formSW.montoinvf}}
-                    </div>
                     <div class="col-3 mt-4">
                       <input type="submit" class="btn btn-success btn-sm float-rigth" value=" Adicionar ">
                       <a href="/indexinv/noedit/0" button class="btn btn-danger btn-sm float-rigth">Cancelar</a>
@@ -75,10 +71,6 @@
                     <div class="col-3">
                       <label for="fecha">Fecha:</label>
                       {{formSW.fechaf}}
-                    </div>
-                    <div class="col-3 mt-1">
-                      <label for="fecha">Monto inversión:</label>
-                      {{formSW.montoinvf}}
                     </div>
                     <div class="col-3 mt-4">
                       <input type="submit" class="btn btn-success btn-sm float-rigth" value=" Actualizar ">
@@ -128,10 +120,10 @@
                           <tbody>
                             {%for invertSW in invertSW%}
                             <tr>
-                              <td>{{invertSW.fecha}}</td>
-                              <td>{{invertSW.montoinver}}</td>
-                              <td>{{invertSW.montoganancia}}</td>
-                              <td>{{invertSW.libre}}</td>
+                              <td width="220">{{invertSW.fecha}}</td>
+                              <td width="150">{{invertSW.montoinver}}</td>
+                              <td width="110">{{invertSW.montoganancia}}</td>
+                              <td width="180">{{invertSW.libre}}</td>
                               <td><a href="/indexalm/{{invertSW.id}}/0" button class="btn btn-primary btn-sm"><i
                                     class="bi bi-bag-check-fill">
                                   </i>Articulos</a>

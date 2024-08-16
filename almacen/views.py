@@ -24,11 +24,14 @@ def almadd(request, dato):
     presv = request.GET["presiobf"]
     presc = request.GET["presiocf"]
     cant = request.GET["cantidadf"]
-    gana = float(presv)*int(cant)
+    gana1 = float(presv)-float(presc)
+    gana2 = (float(presv)-float(presc))*int(cant)
+    ganainv = float(presc)*int(cant)
 
     alma = almacenb.objects.create(
-        idinver=inv, descripcion=descripc, presiob=presv, presioc=presc, cantidad=cant, ganancia=gana, existencia=cant)
-    inv.montoganancia = inv.montoganancia+gana
+        idinver=inv, descripcion=descripc, presiob=presv, presioc=presc, cantidad=cant, ganancia=gana1, existencia=cant)
+    inv.montoganancia = inv.montoganancia+gana2
+    inv.montoinver = inv.montoinver+ganainv
     inv.libre = inv.montoganancia-inv.montoinver
     inv.save()
     return redirect("/indexalm/"+dato+"/0")
@@ -38,6 +41,7 @@ def almadel(request, dato, id):
     alma = almacenb.objects.get(pk=id)
     inv = inversion.objects.get(pk=dato)
     inv.montoganancia = inv.montoganancia-alma.ganancia
+    inv.montoinver = inv.montoinver-(alma.presioc*alma.cantidad)
     inv.libre = inv.montoganancia-inv.montoinver
     inv.save()
     alma.delete()
@@ -90,7 +94,7 @@ def indexinv(request, edit, dato):
 
 def invadd(request):
     fecha = request.GET["fechaf"]
-    montoinv = request.GET["montoinvf"]
+    montoinv = 0
     montogan = 0
     libreinv = 0
     fechar = datetime.strptime(fecha, "%Y-%m-%d")
@@ -102,16 +106,10 @@ def invadd(request):
 
 def invupdate(request, dato):
     fecha = request.GET["fechaf"]
-    montoinv = request.GET["montoinvf"]
-    montogan = 0
-    libreinv = 0
     fechar = datetime.strptime(fecha, "%Y-%m-%d")
     mesinv = fechar.month
     inv = inversion.objects.get(pk=dato)
     inv.fecha = fecha
-    inv.montoinver = montoinv
-    inv.montoganancia = montogan
-    inv.libre = libreinv
     inv.mes = mesinv
     inv.save()
     return redirect("/indexinv/index/0")
@@ -120,4 +118,24 @@ def invupdate(request, dato):
 def invdell(request, dato):
     inv = inversion.objects.get(pk=dato)
     inv.delete()
+    return redirect("/indexinv/index/0")
+
+
+def cal(request):
+    alm = almacenb.objects.all()
+    for alm in alm:
+        alm.ganancia = alm.presiob-alm.presioc
+        alm.save()
+    return redirect("/indexinv/index/0")
+
+
+def invt(request):
+    alm = almacenb.objects.all()
+    tot = 0
+    for alm in alm:
+        tot = tot+(alm.presioc*alm.cantidad)
+    inv = inversion.objects.get(pk=1)
+    inv.montoinver = tot
+    inv.libre = inv.montoganancia-inv.montoinver
+    inv.save()
     return redirect("/indexinv/index/0")

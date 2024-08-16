@@ -93,10 +93,10 @@
         <div class="card" style="width:900px">
           <div class="card-body">
             <div class="row">
-              <div class="col-8">
-                {%include "paginador.html"%}
+              <div class="col-7">
+
               </div>
-              <div class="col-4 mt-1">
+              <div class="col-5 mt-1">
                 <h3>{{inverSW.fecha}}</h3>
               </div>
             </div>
@@ -119,7 +119,8 @@
                         <td width="410">Articulo</td>
                         <td width="95">Cantidad</td>
                         <td width="110">$. de compra</td>
-                        <td>$. de venta</td>
+                        <td width="100">$. de venta</td>
+                        <td width="110">$ G.Unitario</td>
                         <td></td>
                       </tr>
                     </thead>
@@ -136,7 +137,8 @@
                           <td width="410">{{almaSW.descripcion}}</td>
                           <td width="95">{{almaSW.cantidad}}</td>
                           <td width="110">{{almaSW.presioc}}</td>
-                          <td class="">{{almaSW.presiob}}</td>
+                          <td idth="100">{{almaSW.presiob}}</td>
+                          <td cidth="110">{{almaSW.ganancia}}</td>
                           <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal"
                               data-bs-target="#exampleModal" data-inv={{invcontSW}} data-id={{almaSW.id}}
                               data-des='{{almaSW.descripcion}}'><i class="bi bi-trash"></i></button></td>
