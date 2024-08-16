@@ -25,7 +25,7 @@ def almadd(request, dato):
     presc = request.GET["presiocf"]
     cant = request.GET["cantidadf"]
     gana1 = float(presv)-float(presc)
-    gana2 = (float(presv)-float(presc))*int(cant)
+    gana2 = float(presv)*int(cant)
     ganainv = float(presc)*int(cant)
 
     alma = almacenb.objects.create(
@@ -132,10 +132,13 @@ def cal(request):
 def invt(request):
     alm = almacenb.objects.all()
     tot = 0
+    tot2 = 0
     for alm in alm:
         tot = tot+(alm.presioc*alm.cantidad)
+        tot2 = tot2+(alm.presiob*alm.cantidad)
     inv = inversion.objects.get(pk=1)
     inv.montoinver = tot
+    inv.montoganancia = tot2
     inv.libre = inv.montoganancia-inv.montoinver
     inv.save()
     return redirect("/indexinv/index/0")
