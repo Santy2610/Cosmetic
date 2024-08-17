@@ -40,7 +40,7 @@ def almadd(request, dato):
 def almadel(request, dato, id):
     alma = almacenb.objects.get(pk=id)
     inv = inversion.objects.get(pk=dato)
-    inv.montoganancia = inv.montoganancia-alma.ganancia
+    inv.montoganancia = inv.montoganancia-(alma.presiob*alma.cantidad)
     inv.montoinver = inv.montoinver-(alma.presioc*alma.cantidad)
     inv.libre = inv.montoganancia-inv.montoinver
     inv.save()
