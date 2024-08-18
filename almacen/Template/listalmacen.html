@@ -57,9 +57,10 @@
                       <table>
                         <thead class="thead-dark">
                           <tr>
-                            <td width="220">Inversión</td>
-                            <td width="530">Articulo</td>
-                            <td class="text-center">Existencia</td>
+                            <td width="250">Inversión</td>
+                            <td width="500">Articulo</td>
+                            <td width="120">Cant.inicial</td>
+                            <td width="120">Existencia</td>
                           </tr>
                         </thead>
                       </table>
@@ -73,7 +74,8 @@
                             {%for resultSW in resultSW%}
                             <tr>
                               <td class="col-3">{{resultSW.fecha}}</td>
-                              <td class="col-7">{{resultSW.descripcion}}</td>
+                              <td class="col-6">{{resultSW.descripcion}}</td>
+                              <td class="col-1 text-center">{{resultSW.cantidad}}</td>
                               <td class="text-center">{{resultSW.existencia}}</td>
                             </tr>
                             {%endfor%}

@@ -42,17 +42,17 @@
               <div class="card-body">
                 <form class="form-inline" action="/invadd" method="get">
                   <div class="row">
+                    <div class="col-1 mt-2">
+                      <label for="fecha"> Fecha:</label>
+                    </div>
                     <div class="col-3">
-                      <label for="fecha">Fecha:</label>
                       {{formSW.fechaf}}
                     </div>
-                    <div class="col-3 mt-4">
+                    <div class="col-3 mt-1">
                       <input type="submit" class="btn btn-success btn-sm float-rigth" value=" Adicionar ">
                       <a href="/indexinv/noedit/0" button class="btn btn-danger btn-sm float-rigth">Cancelar</a>
                     </div>
-                    <div class="col-1 mt-4">
 
-                    </div>
                   </div>
                 </form>
               </div>
@@ -68,17 +68,17 @@
               <div class="card-body">
                 <form class="form-inline" action="/invupdate/{{invuSW.id}}" method="get">
                   <div class="row">
+                    <div class="col-1 mt-2">
+                      <label for="fecha"> Fecha:</label>
+                    </div>
                     <div class="col-3">
-                      <label for="fecha">Fecha:</label>
                       {{formSW.fechaf}}
                     </div>
-                    <div class="col-3 mt-4">
+                    <div class="col-3 mt-1">
                       <input type="submit" class="btn btn-success btn-sm float-rigth" value=" Actualizar ">
                       <a href="/indexinv/noedit/0" button class="btn btn-danger btn-sm float-rigth">Cancelar</a>
                     </div>
-                    <div class="col-1 mt-4">
 
-                    </div>
                   </div>
                 </form>
               </div>

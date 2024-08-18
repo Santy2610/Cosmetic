@@ -59,6 +59,7 @@ def listalmacen(request):
                 resul.append({
                     'fecha': inv.fecha,
                     'descripcion': alm.descripcion,
+                    'cantidad': alm.cantidad,
                     'existencia': alm.existencia
                 })
 
