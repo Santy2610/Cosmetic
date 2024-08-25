@@ -41,12 +41,16 @@ def indexventa(request):
 
 
 def addventa(request, fechar, id):
-    alma = almacenb.objects.get(pk=id)
-    alma.existencia = alma.existencia-1
-    ven = venta.objects.create(
-        fecha=fechar, descripcion=alma.descripcion, cantidad=1, ganancia=alma.presiob, idalma=alma.id, presioc=alma.presioc)
-    alma.save()
-    ven.save()
+    cantR = request.GET["cant"]
+    if cantR != "":
+        cant = int(cantR)
+        for i in range(cant):
+            alma = almacenb.objects.get(pk=id)
+            alma.existencia = alma.existencia-1
+            ven = venta.objects.create(
+                fecha=fechar, descripcion=alma.descripcion, cantidad=1, ganancia=alma.presiob, idalma=alma.id, presioc=alma.presioc)
+            alma.save()
+            ven.save()
     return redirect("/indexventa?calef="+fechar)
 
 

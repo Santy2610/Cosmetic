@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <title>Ventas</title>
 </head>
 {% load static %}
 <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
@@ -78,8 +79,7 @@
                               <td width="780">{{venSW.descripcion}}</td>
                               <td width="90">{{venSW.tot}} <!--{{venSW.idalma}}--></td>
                               <td><a href="/dismventa/{{yearSW}}-{{mesSW}}-{{diaSW}}/{{venSW.idalma}}" button
-                                  type=button class="btn btn-warning btn-sm"><i
-                                    class="bi bi-arrow-right-circle"></i></a>
+                                  type=button class="btn btn-warning btn-sm">>></a>
                               </td>
                             </tr>
                             {%endfor%}
@@ -98,7 +98,8 @@
                       <table>
                         <thead class="thead-dark">
                           <tr>
-                            <td width="100"> </td>
+                            <td width="180"> </td>
+                            <td width="100">Vendido</td>
                             <td width="780">Producto en almacen</td>
                             <td width="200">Existencia</td>
                             <td width="130">$ Presio</td>
@@ -116,9 +117,13 @@
                           <tbody>
                             {%for almaSW in almaSW%}
                             <tr>
-                              <td><a href="/addventa/{{yearSW}}-{{mesSW}}-{{diaSW}}/{{almaSW.id}}" button type=button
-                                  class="btn btn-success btn-sm"><i class="bi bi-arrow-left-circle"></i></a>
-                              </td>
+                              <form action="/addventa/{{yearSW}}-{{mesSW}}-{{diaSW}}/{{almaSW.id}}">
+                                <td><input type="submit" button type=button class="btn btn-success btn-sm" value="<<" i
+                                    class="bi bi-arrow-left-circle"></i>
+                                <td width="10">
+                                  <input type="number" name="cant" min="1" max="{{almaSW.existencia}}" placeholder="0">
+                                </td>
+                              </form>
                               <td width="500">{{almaSW.descripcion}}</td>
                               <td width="90">{{almaSW.existencia}}</td>
                               <td width="90">{{almaSW.presiob}}</td>

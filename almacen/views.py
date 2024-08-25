@@ -56,11 +56,14 @@ def listalmacen(request):
             idinver=inv).order_by('descripcion')
         for alm in alm:
             if alm.existencia > 0:
+
+                por = int(((alm.cantidad-alm.existencia)/alm.cantidad)*100)
                 resul.append({
                     'fecha': inv.fecha,
                     'descripcion': alm.descripcion,
                     'cantidad': alm.cantidad,
-                    'existencia': alm.existencia
+                    'existencia': alm.existencia,
+                    'porciento': por
                 })
 
     # page = request.GET.get('page', 1)
