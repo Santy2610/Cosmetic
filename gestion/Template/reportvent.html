@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+
+
+<head>
+  <title>Reportes de ventas</title>
+</head>
+{% load static %}
+<link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+<link href="{% static 'Icons/font/bootstrap-icons.min.css'%}" rel="stylesheet">
+
+
+
+
+<body>
+  <div class="container">
+    {%include "barramenu.html"%}
+    <div class="container">
+
+      <div class="row mt-2">
+        <div class="col-1"></div>
+
+
+        <div class="col-9">
+          <div class="card" style="width:900px">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5">
+                  <h3>Reportes de ventas</h3>
+                </div>
+                <div class="col-7">
+                  <!-- {%include "paginador.html"%}-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row mt-1">
+        <div class="col-1"></div>
+        <div class="col-10">
+          <div class="card" style="width:900px">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5">
+                  <table class="table table-striped table-hover table-sm table-fixed">
+                    <tr>
+                      <td>
+                        <table>
+                          <thead class="thead-dark">
+                            <tr>
+                              <td width="210">Fecha</td>
+                              <td width="120">$ Total venta</td>
+                              <td width="90">$ Libre</td>
+                            </tr>
+                          </thead>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="width:400px; height:380px; overflow:auto;">
+                          <table class="table table-striped table-hover table-sm table-fixed" id="myTable">
+                            <tbody>
+                              {%for ventSW in ventSW%}
+                              <tr>
+                                <td width="220"><a button type="button" class="btn btn-outline-light btn-sm"
+                                    href="{{ventSW.fecha}}">{{ventSW.fecha}}</a></td>
+                                <td width="120">{{ventSW.sumg}}</td>
+                                <td width="90">{{ventSW.res}}</td>
+                              </tr>
+                              {%endfor%}
+                            </tbody>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-1"></div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    function myFunction() {
+      // Declare variables 
+      var input, filter, table, tr, td, i, j, visible;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        visible = false;
+        /* Obtenemos todas las celdas de la fila, no sólo la primera */
+        td = tr[i].getElementsByTagName("td");
+        for (j = 0; j < td.length; j++) {
+          if (td[j] && td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            visible = true;
+          }
+        }
+        if (visible === true) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+
+
+
+  <script src="{%static 'theme.js'%}"></script>
+  <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'color-modes.js'%}"></script>
+
+
+</body>
+
+
+</html>

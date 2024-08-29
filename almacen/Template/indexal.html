@@ -37,16 +37,18 @@
                         <div class="modal-body">
                           <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtrar por descripción">
                           <hr>
-                          <table class="table table-striped table-hover table-sm" id="myTable">
-                            {%for listadoSW in listadoSW%}
-                            <tr>
-                              <td>{{listadoSW.descripcion}}</td>
-                              <td class="col-1 text-center"><button type="button" class="btn btn-success btn-sm"
-                                  onclick="actua('{{listadoSW.descripcion}}');" data-bs-dismiss="modal"><i
-                                    class="bi bi-bag-check-fill"></i></button></td>
-                            </tr>
-                            {%endfor%}
-                          </table>
+                          <div style="width:470px; height:260px; overflow:auto;">
+                            <table class="table table-striped table-hover table-sm" id="myTable">
+                              {%for listadoSW in listadoSW%}
+                              <tr>
+                                <td>{{listadoSW.descripcion}}</td>
+                                <td class="col-1 text-center"><button type="button" class="btn btn-success btn-sm"
+                                    onclick="actua('{{listadoSW.descripcion}}');" data-bs-dismiss="modal"><i
+                                      class="bi bi-bag-check-fill"></i></button></td>
+                              </tr>
+                              {%endfor%}
+                            </table>
+                          </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-primary" data-bs-dismiss="modal"> Cerrar</button>
