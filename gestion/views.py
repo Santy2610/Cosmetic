@@ -5,6 +5,7 @@ from gestion.formulario import vistvent
 from gestion.models import venta
 from almacen.models import almacenb
 from django.db.models import Sum
+import locale
 
 # Create your views here.
 
@@ -67,17 +68,19 @@ def dismventa(request, fechar, id):
 
 
 def reportvent(request, date):
-    # cont = venta.objects.all().order_by('fecha')
-    # cont.first()
-    # fecha1 = cont.fecha.value()
-    datef = datetime.strptime(date, "%Y-%m-%d").date()
     vent = venta.objects.values('fecha').order_by('fecha').annotate(
         sumg=Sum('ganancia'), suml=Sum('presioc'), res=Sum('ganancia')-Sum('presioc'))
-    # if date != "0000-00-00":
-    #   most = venta.objects.values('descripcion').filter(
-    #      fecha=date).annotate(cant=sum('cantidad'))
-    # else:
-    #   fechar = datetime.strptime(fecha1, "%Y-%m-%d").date()
-    #  most = venta.objects.values('descripcion').filter(
-    #     fecha=fechar).annotate(cant=sum('cantidad'))
-    return render(request, "reportvent.html", {"ventSW": vent, "conal": cantalm})
+    if date == "0":
+        las = venta.objects.all().order_by('-fecha')
+        for las in las:
+            datec = las.fecha
+        # date = datetime.strptime(date1, "%Y-%m-%d").date()
+        most = venta.objects.values('descripcion').filter(
+            fecha=datec).annotate(cant=Sum('cantidad'))
+    else:
+        locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+        date = datetime.strptime(date, '%d de %B de %Y').date()
+        most = venta.objects.values('descripcion').filter(
+            fecha=date).annotate(cant=Sum('cantidad'))
+        datec = date
+    return render(request, "reportvent.html", {"ventSW": vent, "conal": cantalm, "datecSW": datec, "mostSW": most})

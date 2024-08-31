@@ -44,7 +44,7 @@
           <div class="card" style="width:900px">
             <div class="card-body">
               <div class="row">
-                <div class="col-5">
+                <div class="col-6">
                   <table class="table table-striped table-hover table-sm table-fixed">
                     <tr>
                       <td>
@@ -61,18 +61,55 @@
                     </tr>
                     <tr>
                       <td>
-                        <div style="width:400px; height:380px; overflow:auto;">
+                        <div style="width:414px; height:380px; overflow:auto;">
                           <table class="table table-striped table-hover table-sm table-fixed" id="myTable">
                             <tbody>
                               {%for ventSW in ventSW%}
-                              <tr>
-                                <td width="220"><a button type="button" class="btn btn-outline-light btn-sm"
+
+                              {%if ventSW.fecha == datecSW%}
+                              <tr class="table-primary">
+                                <td width="220"><a button type="button" class="btn btn-outline-primary btn-sm"
                                     href="{{ventSW.fecha}}">{{ventSW.fecha}}</a></td>
+                                {%else%}
+                              <tr>
+                                <td width="220"><a button type="button" class="btn btn-outline-success btn-sm"
+                                    href="{{ventSW.fecha}}">{{ventSW.fecha}}</a></td>
+                                {%endif%}
                                 <td width="120">{{ventSW.sumg}}</td>
                                 <td width="90">{{ventSW.res}}</td>
                               </tr>
                               {%endfor%}
                             </tbody>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-6">
+                  <table class="table table-striped table-hover table-sm table-fixed">
+                    <tr>
+                      <td>
+                        <table>
+                          <thead class="thead-dark">
+                            <tr>
+                              <td width="460">Producto</td>
+                              <td width="100">Cantidad</td>
+                            </tr>
+                          </thead>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="width:414px; height:380px; overflow:auto;">
+                          <table class="table table-striped table-hover table-sm table-fixed" id="myTable">
+                            {%for mostSW in mostSW%}
+                            <tr>
+                              <td width="480">{{mostSW.descripcion}}</td>
+                              <td width="93">{{mostSW.cant}}</td>
+                            </tr>
+                            {%endfor%}
                           </table>
                         </div>
                       </td>
