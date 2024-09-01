@@ -10,3 +10,8 @@ class venta(models.Model):
     ganancia = models.FloatField()
     presioc = models.FloatField()
     idalma = models.IntegerField()
+
+
+class pedido(models.Model):
+    descripcion = models.CharField(max_length=150)
+    cantidad = models.IntegerField()

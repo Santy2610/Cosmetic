@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Ventas</title>
+
+
+</head>
+{% load static %}
+<link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+<link href="{% static 'Icons/font/bootstrap-icons.min.css'%}" rel="stylesheet">
+
+<body>
+
+
+
+
+  <div class="container">
+    {%include "barramenu.html"%}
+    <div class="row mt-1">
+
+
+      <div class="col-9">
+        <div class="card" style="width:1117px">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-9">
+                <h3>Pedidos</h3>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row mt-1">
+      <div class="col-10">
+        <div class="card" style="width:1117px">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-6">
+                <button type=button class="btn btn-success btn-sm"><i class="bi bi-bag-plus-fill" width="32"
+                    height="32"></i> Adicionar nuevo producto</button>
+              </div>
+              <div class="col-4">
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtrar por descripción">
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-6">
+                <table class="table table-striped table-hover table-sm table-fixed">
+                  <tr>
+                    <td>
+                      <table>
+                        <thead class="thead-dark btn-danger">
+                          <tr>
+                            <td width="600">Producto pedido</td>
+                            <td width="150">Cantidad</td>
+                            <td></td>
+                          </tr>
+                        </thead>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div style="width:530px; height:380px; overflow:auto;">
+                        <table class="table table-striped table-hover table-sm table-fixed">
+                          <tbody>
+                            {%for pedidSW in pedidSW%}
+                            <tr>
+                              <td width="780">{{pedidSW.descripcion}}</td>
+                              <td width="90">{{pedidSW.cantidad}}</td>
+                              <td><a href="#" button type=button class="btn btn-warning btn-sm">>></a>
+                              <td><a href="#" button type=button class="btn btn-success btn-sm"></a>
+                              </td>
+                            </tr>
+                            {%endfor%}
+                          </tbody>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-6">
+
+                <table class="table table-striped table-hover table-sm table-fixed">
+                  <tr>
+                    <td>
+                      <table>
+                        <thead class="thead-dark">
+                          <tr>
+                            <td width="110"> </td>
+                            <td width="90">Pedido</td>
+                            <td width="780">Producto</td>
+                          </tr>
+                        </thead>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div style="width:530px; height:380px; overflow:auto;">
+                        <table class="table table-striped table-hover table-sm table-fixed" id="myTable">
+                          <tbody>
+                            {%for almaSW in almaSW%}
+                            <tr>
+                              <form action="/addventa/{{yearSW}}-{{mesSW}}-{{diaSW}}/{{almaSW.id}}">
+                                <td><input type="submit" button type=button class="btn btn-success btn-sm" value="<<">
+                                <td width="10">
+                                  <input type="number" id="number" name="cant" min="1" max="100" placeholder="0"
+                                    style="width: 4em;">
+                                </td>
+                              </form>
+                              <td width="500">{{almaSW.descripcion}}</td>
+                            </tr>
+                            {%endfor%}
+                          </tbody>
+                        </table>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  </div>
+
+  <script src="{%static 'theme.js'%}"></script>
+  <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'color-modes.js'%}"></script>
+
+  <script>
+    function myFunction() {
+      // Declare variables 
+      var input, filter, table, tr, td, i, j, visible;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        visible = false;
+        /* Obtenemos todas las celdas de la fila, no sólo la primera */
+        td = tr[i].getElementsByTagName("td");
+        for (j = 0; j < td.length; j++) {
+          if (td[j] && td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            visible = true;
+          }
+        }
+        if (visible === true) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+
+
+  <script>
+    function actua(dato1) {
+      document.getElementById('id_descripcionf').value = dato1;
+    }
+  </script>
+
+
+
+
+</body>
+
+</html>

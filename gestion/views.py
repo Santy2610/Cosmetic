@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from cosmetic.views import cantalm
 from datetime import date, datetime
 from gestion.formulario import vistvent
-from gestion.models import venta
+from gestion.models import venta, pedido
 from almacen.models import almacenb
 from django.db.models import Sum
 import locale
@@ -84,3 +84,9 @@ def reportvent(request, date):
             fecha=date).annotate(cant=Sum('cantidad'))
         datec = date
     return render(request, "reportvent.html", {"ventSW": vent, "conal": cantalm, "datecSW": datec, "mostSW": most})
+
+
+def indexpedid(request):
+    alma = almacenb.objects.values("descripcion").order_by("descripcion")
+    pedid = pedido.objects.all()
+    return render(request, "indexpedido.html", {"almaSW": alma, "pedidWS": pedid, "conal": cantalm})
