@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from cosmetic.views import cantalm
 from datetime import date, datetime
-from gestion.formulario import vistvent
+from gestion.formulario import vistvent, pedidof
 from gestion.models import venta, pedido
 from almacen.models import almacenb
 from django.db.models import Sum
@@ -87,6 +87,40 @@ def reportvent(request, date):
 
 
 def indexpedid(request):
+    formp = pedidof()
     alma = almacenb.objects.values("descripcion").order_by("descripcion")
     pedid = pedido.objects.all()
-    return render(request, "indexpedido.html", {"almaSW": alma, "pedidWS": pedid, "conal": cantalm})
+    return render(request, "indexpedido.html", {"almaSW": alma, "pedidSW": pedid, "formpSW": formp, "conal": cantalm})
+
+
+def addpedido(request):
+    descrip = request.GET["descripf"]
+    cantid = request.GET["cantidf"]
+    ped = pedido.objects.create(descripcion=descrip, cantidad=cantid)
+    ped.save()
+    return redirect("/indexpedid")
+
+
+def addpedidoc(request, id):
+    alm = almacenb.objects.get(descripcion=id)
+    descrip = alm.descripcion
+    cantid = request.GET["cant"]
+    ped = pedido.objects.create(descripcion=descrip, cantidad=cantid)
+    ped.save()
+    return redirect("/indexpedid")
+
+
+def sumpedido(request, id):
+    sum = pedido.objects.get(pk=id)
+    sum.cantidad = sum.cantidad+1
+    sum.save()
+    return redirect("/indexpedid")
+
+
+def delpedido(request, id):
+    sum = pedido.objects.get(pk=id)
+    sum.cantidad = sum.cantidad-1
+    sum.save()
+    if sum.cantidad == 0:
+        sum.delete()
+    return redirect("/indexpedid")
