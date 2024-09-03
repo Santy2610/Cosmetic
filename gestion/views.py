@@ -103,10 +103,8 @@ def addpedido(request):
 
 
 def addpedidoc(request, id):
-    alm = almacenb.objects.get(descripcion=id)
-    descrip = alm.descripcion
     cantid = request.GET["cant"]
-    ped = pedido.objects.create(descripcion=descrip, cantidad=cantid)
+    ped = pedido.objects.create(descripcion=id, cantidad=cantid)
     ped.save()
     return redirect("/indexpedid")
 
@@ -125,3 +123,8 @@ def delpedido(request, id):
     if sum.cantidad == 0:
         sum.delete()
     return redirect("/indexpedid")
+
+
+def reportpedido(request):
+    pep = pedido.objects.all().order_by('descripcion')
+    return render(request, "reportpedido.html", {"pepSW": pep})
