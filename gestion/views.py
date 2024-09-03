@@ -78,7 +78,7 @@ def reportvent(request, date):
         most = venta.objects.values('descripcion').filter(
             fecha=datec).annotate(cant=Sum('cantidad'))
     else:
-        locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+        locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
         date = datetime.strptime(date, '%d de %B de %Y').date()
         most = venta.objects.values('descripcion').filter(
             fecha=date).annotate(cant=Sum('cantidad'))
@@ -88,7 +88,8 @@ def reportvent(request, date):
 
 def indexpedid(request):
     formp = pedidof()
-    alma = almacenb.objects.values("descripcion").order_by("descripcion")
+    alma = almacenb.objects.filter(existencia=0).values(
+        "descripcion").order_by("descripcion")
     pedid = pedido.objects.all()
     return render(request, "indexpedido.html", {"almaSW": alma, "pedidSW": pedid, "formpSW": formp, "conal": cantalm})
 
