@@ -1,5 +1,0 @@
-[Desktop Entry]
-Name=Cosmetic
-Comment=Control de inversiones
-Exec=/media/santiago/Trabajo/cosmetic/python3 manage.py runserver
-Terminal=true

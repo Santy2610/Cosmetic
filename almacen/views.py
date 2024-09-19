@@ -5,6 +5,7 @@ from datetime import datetime
 from django.core.paginator import Paginator
 from django.db.models import Sum
 from cosmetic.views import cantalm
+import locale
 
 # Create your views here.
 
@@ -50,7 +51,7 @@ def almadel(request, dato, id):
 
 def listalmacen(request):
     resul = []
-    inv = inversion.objects.all().order_by('fecha')
+    inv = inversion.objects.all().order_by('-fecha')
     for inv in inv:
         alm = almacenb.objects.filter(
             idinver=inv).order_by('descripcion')
@@ -146,3 +147,29 @@ def invt(request):
     inv.libre = inv.montoganancia-inv.montoinver
     inv.save()
     return redirect("/indexinv/index/0")
+
+
+def invereport(request):
+    invert2 = []
+    invert = inversion.objects.all().order_by('-fecha')
+    for invert in invert:
+        cant = 0
+        almacen = almacenb.objects.filter(idinver=invert)
+        for almacen in almacen:
+            sumae = (almacen.cantidad-almacen.existencia)*almacen.presiob
+
+            cant = cant+sumae
+
+        dif = invert.montoganancia-cant
+        por = int((cant/invert.montoganancia)*100)
+        invert2.append({
+            'fecha': invert.fecha,
+            'montoinver': invert.montoinver,
+            'montoganancia': invert.montoganancia,
+            'libre': invert.libre,
+            'cant': cant,
+            'por': por,
+            'dif': dif
+        })
+
+    return render(request, "invereporte.html", {"invertSW": invert2, "conal": cantalm})

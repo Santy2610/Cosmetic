@@ -5,7 +5,8 @@ from gestion.models import venta, pedido
 
 
 class ventaAdmin(admin.ModelAdmin):
-    list_display = ("fecha", "descripcion", "cantidad", "ganancia")
+    list_display = ("fecha", "descripcion", "cantidad",
+                    "ganancia", "presioc", "idalma")
 
 
 class pedidoAdmin(admin.ModelAdmin):

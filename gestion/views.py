@@ -68,10 +68,10 @@ def dismventa(request, fechar, id):
 
 
 def reportvent(request, date):
-    vent = venta.objects.values('fecha').order_by('fecha').annotate(
+    vent = venta.objects.values('fecha').order_by('-fecha').annotate(
         sumg=Sum('ganancia'), suml=Sum('presioc'), res=Sum('ganancia')-Sum('presioc'))
     if date == "0":
-        las = venta.objects.all().order_by('-fecha')
+        las = venta.objects.all().order_by('fecha')
         for las in las:
             datec = las.fecha
         # date = datetime.strptime(date1, "%Y-%m-%d").date()
@@ -127,4 +127,4 @@ def delpedido(request, id):
 
 def reportpedido(request):
     pep = pedido.objects.all().order_by('descripcion')
-    return render(request, "reportpedido.html", {"pepSW": pep})
+    return render(request, "reportpedido.html", {"pepSW": pep, "conal": cantalm})
