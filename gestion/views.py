@@ -56,7 +56,7 @@ def addventa(request, fechar, id):
 
 
 def dismventa(request, fechar, id):
-    vent = venta.objects.filter(idalma=id).all()
+    vent = venta.objects.filter(idalma=id, fecha=fechar).all()
     for vent in vent:
         loc = vent.id
     tra = venta.objects.get(pk=loc)
