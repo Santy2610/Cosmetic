@@ -18,6 +18,7 @@ from django.urls import path
 from cosmetic.views import principal
 from almacen.views import indexalm, indexinv, invadd, invdell, invupdate, almadd, almadel, listalmacen, cal, invt, invereport
 from gestion.views import indexventa, addventa, dismventa, reportvent, indexpedid, addpedido, sumpedido, delpedido, addpedidoc, reportpedido
+from sistema.views import config, configdel
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -46,4 +47,8 @@ urlpatterns = [
     path('sumpedido/<id>', sumpedido),
     path('delpedido/<id>', delpedido),
     path('reportpedido', reportpedido),
+    
+    path('config', config),
+    path('configdel', configdel),
+    
 ]

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from almacen.models import almacenb
 from django.db.models import Sum
 from gestion.formulario import vistvent
+from gestion.models import venta
 
 
 def cantalm():
@@ -11,6 +12,11 @@ def cantalm():
     for cont in cont:
         res = res+cont.conta
     return res
+
+
+def pront():
+    fluc = venta.objects.all()
+    return fluc
 
 
 def principal(request):
@@ -43,4 +49,4 @@ def principal(request):
                 'porciento': porc
             })
 
-    return render(request, "index.html", {"conal": cantalm, "ventaMSW": ventaM, "noventaMSW": noventaM})
+    return render(request, "index.html", {"conal": cantalm, "ventaMSW": ventaM, "noventaMSW": noventaM, "clucSW": pront})

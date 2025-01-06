@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+</head>
+{% load static %}
+<link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+<link href="{% static 'Icons/font/bootstrap-icons.min.css'%}" rel="stylesheet">
+
+<body>
+
+
+  <div class="container">
+    {%include "barramenu.html"%}
+    <div class="row mt-2">
+      <div class="col-3"></div>
+
+      <div class="col-9 mt-2">
+        <div class="card" style="width:500px">
+          <div class="card-body">
+
+            <h3 class="card-title">Inicialización del sistema</h3>
+            <p class="card-text">
+              <b>
+                <p>Si procede a realizar esta funcion se perderan todos los datos guardados en la aplicación</p>
+                <h5>Cantidad de datos registrados:</h5>
+              </b>
+            <ul>
+              <li>Cantidad de datos de inversion: <b>{{inversionSW|length}}</b> records</li>
+              <li>Cantidad de datos de almacen: <b>{{almacenbSW|length}}</b> records</li>
+              <li>Cantidad de datos de venta: <b>{{ventaSW|length}}</b> records</li>
+              <li>Cantidad de datos de pedidos: <b>{{pedidoSW|length}}</b> records</li>
+            </ul>
+            </p>
+            <div class="card-footer">
+
+              <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">Inicializar</button>
+
+
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Eliminar articulo</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                      <div id="del"></div>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cerrar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+            </div>
+          </div>
+        </div>
+        <div class="col-1"></div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-1"></div>
+
+        <div class="col-9">
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-1"></div>
+
+  </div>
+  </div>
+
+  <script src="{%static 'theme.js'%}"></script>
+  <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'color-modes.js'%}"></script>
+
+  <script>
+    var exampleModal = document.getElementById('exampleModal')
+    exampleModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget
+
+      var modalTitle = exampleModal.querySelector('.modal-title')
+      var modalBody = exampleModal.querySelector('.modal-body')
+      var modalfooter = exampleModal.querySelector('.modal-footer')
+
+      //modalTitle.textContent = 'New message to ' + recipient
+      modalTitle.textContent = 'Inicializar sistema'
+      modalBody.textContent = 'Se dispone a inicializar las bases de datos, ¿USTED ESTA SEGURO DE REALIZAR ESTA FUNCION, SE PERDERAN TODOS LOS DATOS GUARDADOS?'
+      modalfooter.innerHTML = '<a href="/configdel" button type=button class="btn btn-danger">Eliminar los registros</a>' + '<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>'
+
+
+    })
+
+  </script>
+
+
+
+
+
+</body>
+
+</html>

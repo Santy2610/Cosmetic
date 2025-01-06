@@ -4,7 +4,7 @@ from almacen.formulario import inversionf, almacenf
 from datetime import datetime
 from django.core.paginator import Paginator
 from django.db.models import Sum
-from cosmetic.views import cantalm
+from cosmetic.views import cantalm, pront
 import locale
 
 # Create your views here.
@@ -16,7 +16,7 @@ def indexalm(request, dato, valor):
     listado = almacenb.objects.values('descripcion').order_by(
         'descripcion').annotate(sun=Sum('cantidad'))
     formal = almacenf()
-    return render(request, "indexal.html", {"almaSW": alma, "formalSW": formal, "inverSW": inver, "invcontSW": dato, "listadoSW": listado, "conal": cantalm})
+    return render(request, "indexal.html", {"almaSW": alma, "formalSW": formal, "inverSW": inver, "invcontSW": dato, "listadoSW": listado, "conal": cantalm, "clucSW": pront})
 
 
 def almadd(request, dato):
@@ -71,7 +71,7 @@ def listalmacen(request):
     # paginador = Paginator(resul, 12)
     # resul = paginador.page(page)
 
-    return render(request, "listalmacen.html", {"resultSW": resul, "conal": cantalm})
+    return render(request, "listalmacen.html", {"resultSW": resul, "conal": cantalm, "clucSW": pront})
 
 
 def indexinv(request, edit, dato):
@@ -86,15 +86,15 @@ def indexinv(request, edit, dato):
         forminv = inversionf(
             initial={'fechaf': invsel.fecha,  'montoinvf': invsel.montoinver})
         edit = "edit"
-        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "editSW": edit, "datoSW": dato, "invuSW": invsel,  "conal": cantalm})
+        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "editSW": edit, "datoSW": dato, "invuSW": invsel,  "conal": cantalm, "clucSW": pront})
     elif edit == "add":
         forminv = inversionf()
         edit = "add"
-        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "editSW": edit, "datoSW": dato,  "conal": cantalm})
+        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "editSW": edit, "datoSW": dato,  "conal": cantalm, "clucSW": pront})
     else:
         forminv = inversionf()
         edit = "noedit"
-        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "editSW": edit, "datoSW": dato, "conal": cantalm})
+        return render(request, "indexinv.html", {"formSW": forminv, "invertSW": invert, "editSW": edit, "datoSW": dato, "conal": cantalm, "clucSW": pront})
 
 
 def invadd(request):
@@ -172,4 +172,4 @@ def invereport(request):
             'dif': dif
         })
 
-    return render(request, "invereporte.html", {"invertSW": invert2, "conal": cantalm})
+    return render(request, "invereporte.html", {"invertSW": invert2, "conal": cantalm, "clucSW": pront})

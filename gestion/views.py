@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from cosmetic.views import cantalm
+from cosmetic.views import cantalm, pront
 from datetime import date, datetime
 from gestion.formulario import vistvent, pedidof
 from gestion.models import venta, pedido
@@ -38,7 +38,7 @@ def indexventa(request):
     dia = fechat.day
     year = fechat.year
     return render(request, "indexventa.html", {"conal": cantalm, "dateSW": fechat, "formSW": formc, "venSW": ven,
-                                               "almaSW": alma, "mesSW": mes, "diaSW": dia, "yearSW": year, "sugSW": sug, "libSW": lib})
+                                               "almaSW": alma, "mesSW": mes, "diaSW": dia, "yearSW": year, "sugSW": sug, "libSW": lib, "clucSW": pront})
 
 
 def addventa(request, fechar, id):
@@ -83,7 +83,7 @@ def reportvent(request, date):
         most = venta.objects.values('descripcion').filter(
             fecha=date).annotate(cant=Sum('cantidad'))
         datec = date
-    return render(request, "reportvent.html", {"ventSW": vent, "conal": cantalm, "datecSW": datec, "mostSW": most})
+    return render(request, "reportvent.html", {"ventSW": vent, "conal": cantalm, "datecSW": datec, "mostSW": most, "clucSW": pront})
 
 
 def indexpedid(request):
@@ -91,7 +91,7 @@ def indexpedid(request):
     alma = almacenb.objects.filter(existencia=0).values(
         "descripcion").order_by("descripcion")
     pedid = pedido.objects.all()
-    return render(request, "indexpedido.html", {"almaSW": alma, "pedidSW": pedid, "formpSW": formp, "conal": cantalm})
+    return render(request, "indexpedido.html", {"almaSW": alma, "pedidSW": pedid, "formpSW": formp, "conal": cantalm, "clucSW": pront})
 
 
 def addpedido(request):
@@ -127,4 +127,4 @@ def delpedido(request, id):
 
 def reportpedido(request):
     pep = pedido.objects.all().order_by('descripcion')
-    return render(request, "reportpedido.html", {"pepSW": pep, "conal": cantalm})
+    return render(request, "reportpedido.html", {"pepSW": pep, "conal": cantalm, "clucSW": pront})

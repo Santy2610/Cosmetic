@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'almacen',
     'gestion',
+    'sistema',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'cosmetic/Template',
                  BASE_DIR / 'gestion/Template',
-                 BASE_DIR / 'almacen/Template',],
+                 BASE_DIR / 'almacen/Template',
+                 BASE_DIR / 'sistema/Template',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,8 +123,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATICFILES_DIRS = [BASE_DIR / 'cosmetic/static', ]
+STATICFILES_DIRS = [BASE_DIR / 'cosmetic/static/',]
 STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
