@@ -121,9 +121,9 @@
                             {%for invertSW in invertSW%}
                             <tr>
                               <td width="220">{{invertSW.fecha}}</td>
-                              <td width="150">{{invertSW.montoinver}}</td>
-                              <td width="110">{{invertSW.montoganancia}}</td>
-                              <td width="180">{{invertSW.libre}}</td>
+                              <td width="150">{{invertSW.montoinver|floatformat:2}}</td>
+                              <td width="110">{{invertSW.montoganancia|floatformat:2}}</td>
+                              <td width="180">{{invertSW.libre|floatformat:2}}</td>
                               <td><a href="/indexalm/{{invertSW.id}}/0" button class="btn btn-primary btn-sm"><i
                                     class="bi bi-bag-check-fill">
                                   </i>Articulos</a>

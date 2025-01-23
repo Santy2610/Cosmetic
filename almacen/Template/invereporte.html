@@ -70,12 +70,12 @@
                             {%for invertSW in invertSW%}
                             <tr>
                               <td width="260">{{invertSW.fecha}}</td>
-                              <td width="130">{{invertSW.montoinver}}</td>
-                              <td class="table-success" width="120">{{invertSW.montoganancia}}</td>
-                              <td width="110">{{invertSW.libre}}</td>
-                              <td class="table-success" width="100">{{invertSW.cant}}</td>
+                              <td width="130">{{invertSW.montoinver|floatformat:2}}</td>
+                              <td class="table-success" width="120">{{invertSW.montoganancia|floatformat:2}}</td>
+                              <td width="110">{{invertSW.libre|floatformat:2}}</td>
+                              <td class="table-success" width="100">{{invertSW.cant|floatformat:2}}</td>
                               <td class="table-danger text-center" width="80">({{invertSW.por}} %)</td>
-                              <td width="120">{{invertSW.dif}}</td>
+                              <td width="120">{{invertSW.dif|floatformat:2}}</td>
                             </tr>
                             {%endfor%}
 

@@ -22,7 +22,7 @@ from sistema.views import config, configdel
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', principal),
+    path('', invt),
 
     path('indexalm/<dato>/<valor>', indexalm),
     path('almadd/<dato>', almadd),
@@ -47,8 +47,8 @@ urlpatterns = [
     path('sumpedido/<id>', sumpedido),
     path('delpedido/<id>', delpedido),
     path('reportpedido', reportpedido),
-    
+
     path('config', config),
     path('configdel', configdel),
-    
+
 ]

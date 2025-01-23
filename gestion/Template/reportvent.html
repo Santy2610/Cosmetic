@@ -75,8 +75,8 @@
                                 <td width="220"><a button type="button" class="btn btn-outline-success btn-sm"
                                     href="{{ventSW.fecha}}">{{ventSW.fecha}}</a></td>
                                 {%endif%}
-                                <td width="120">{{ventSW.sumg}}</td>
-                                <td width="90">{{ventSW.res}}</td>
+                                <td width="120">{{ventSW.sumg|floatformat:2}}</td>
+                                <td width="90">{{ventSW.res|floatformat:2}}</td>
                               </tr>
                               {%endfor%}
                             </tbody>
