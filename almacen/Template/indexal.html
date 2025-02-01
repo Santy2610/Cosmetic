@@ -138,9 +138,9 @@
                         <tr>
                           <td width="410">{{almaSW.descripcion}}</td>
                           <td width="95">{{almaSW.cantidad}}</td>
-                          <td width="110">{{almaSW.presioc}}</td>
-                          <td idth="100">{{almaSW.presiob}}</td>
-                          <td cidth="110">{{almaSW.ganancia}}</td>
+                          <td width="110">{{almaSW.presioc|floatformat:2}}</td>
+                          <td idth="100">{{almaSW.presiob|floatformat:2}}</td>
+                          <td cidth="110">{{almaSW.ganancia|floatformat:2}}</td>
                           <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal"
                               data-bs-target="#exampleModal" data-inv={{invcontSW}} data-id={{almaSW.id}}
                               data-des='{{almaSW.descripcion}}'><i class="bi bi-trash"></i></button>

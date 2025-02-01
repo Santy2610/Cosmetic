@@ -141,7 +141,7 @@ def invt(request):
     for alm in alm:
         tot = tot+(alm.presioc*alm.cantidad)
         tot2 = tot2+(alm.presiob*alm.cantidad)
-    inv = inversion.objects.get(pk=1)
+    inv = inversion.objects.get(pk=alm.idinver_id)
     inv.montoinver = tot
     inv.montoganancia = tot2
     inv.libre = inv.montoganancia-inv.montoinver
@@ -153,15 +153,19 @@ def invereport(request):
     invert2 = []
     invert = inversion.objects.all().order_by('-fecha')
     for invert in invert:
-        cant = 0
         almacen = almacenb.objects.filter(idinver=invert)
+        cant = 0
+        plan = 0
+        real = 0
         for almacen in almacen:
             sumae = (almacen.cantidad-almacen.existencia)*almacen.presiob
-
             cant = cant+sumae
+            plan = plan+almacen.cantidad
+            real = real+almacen.existencia
 
         dif = invert.montoganancia-cant
-        por = int((cant/invert.montoganancia)*100)
+        por = (real/plan)*100
+        por = 100-por
         invert2.append({
             'fecha': invert.fecha,
             'montoinver': invert.montoinver,
@@ -170,6 +174,7 @@ def invereport(request):
             'cant': cant,
             'por': por,
             'dif': dif
+
         })
 
     return render(request, "invereporte.html", {"invertSW": invert2, "conal": cantalm, "clucSW": pront})
