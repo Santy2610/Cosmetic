@@ -1,5 +1,5 @@
 from django.contrib import admin
-from gestion.models import venta, pedido
+from gestion.models import venta, pedido, promot, articulo
 
 # Register your models here.
 
@@ -13,5 +13,15 @@ class pedidoAdmin(admin.ModelAdmin):
     list_display = ("descripcion", "cantidad")
 
 
+class promotAdmin(admin.ModelAdmin):
+    list_display = ("Nombre",)
+
+
+class articuloAdmin(admin.ModelAdmin):
+    list_display = ("fecha", "descripcion", "cantidad")
+
+
 admin.site.register(venta, ventaAdmin)
 admin.site.register(pedido, pedidoAdmin)
+admin.site.register(promot, promotAdmin)
+admin.site.register(articulo, articuloAdmin)

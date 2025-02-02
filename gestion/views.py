@@ -128,3 +128,7 @@ def delpedido(request, id):
 def reportpedido(request):
     pep = pedido.objects.all().order_by('descripcion')
     return render(request, "reportpedido.html", {"pepSW": pep, "conal": cantalm, "clucSW": pront})
+
+
+def indexpromot(request):
+    return render(request, "indexpromot.html")

@@ -15,3 +15,15 @@ class venta(models.Model):
 class pedido(models.Model):
     descripcion = models.CharField(max_length=150)
     cantidad = models.IntegerField()
+
+
+class promot(models.Model):
+    Nombre = models.CharField(max_length=255)
+
+
+class articulo(models.Model):
+    idNombre = models.ForeignKey(
+        promot, on_delete=models.CASCADE, null=False, blank=False)
+    fecha = models.DateField()
+    descripcion = models.CharField(max_length=150)
+    cantidad = models.IntegerField()

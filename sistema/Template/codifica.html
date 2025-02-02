@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+</head>
+{% load static %}
+<link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+<link href="{% static 'Icons/font/bootstrap-icons.min.css'%}" rel="stylesheet">
+
+<body>
+
+
+  <div class="container">
+    {%include "barramenu.html"%}
+    <div class="row mt-2">
+      <div class="col-1"></div>
+
+      <div class="col-9">
+        <div class="card" style="width:900px">
+          <div class="card-body">
+            <h2>Promotores</h2>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-1"></div>
+    </div>
+
+    <div class="row mt-1">
+      <div class="col-1"></div>
+
+      <div class="col-9">
+        <div class="card" style="width:900px">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-7 mt-1">
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtrar por descripción">
+              </div>
+              <div class="col-5 mt-1">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-1">
+      <div class="col-1"></div>
+      <div class="col-5">
+        <div class="card" style="width:470px">
+
+          <div class="card-body">
+            <table class="table table-striped table-hover table-sm">
+              <tr>
+                <td>
+                  <table>
+                    <thead class="thead-dark">
+                      <tr>
+                        <td width="330">Nombre</td>
+                        <td width="1"></td>
+                        <td></td>
+                      </tr>
+                    </thead>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="width:430px; height:260px; overflow:auto;">
+                    <table class="table table-striped table-hover table-sm table-fixed" id="myTable">
+                      <tbody>
+                        {%for promoSW in promoSW%}
+                        <tr>
+                          <td width="390">{{promoSW.Nombre}}</td>
+                          <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                              data-bs-target="#exampleModal" data-id={{promoSW.id}} data-nombre="{{promoSW.Nombre}}"><i
+                                class="bi bi-trash"></i></button>
+                          </td>
+                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Eliminar promotora</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="modal-body">
+                                </div>
+                                <div class="modal-footer">
+                                  <div id="del"></div>
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Cerrar</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </tr>
+                        {%endfor%}
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-5">
+        <div class="card" style="width:425px">
+          <h5 class="card-title">Adicionar promotores</h5>
+          <form class="form-inline" action="/addcodifi" method="get">
+            <table>
+              <tr>
+                <td>Nombre:</td>
+              </tr>
+              <tr>
+                <td>{{formpSW.NombF}}</td>
+              </tr>
+              <tr>
+                <td> </td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="submit" class="btn btn-success btn-sm float-rigth" value=" Adicionar ">
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <script src="{%static 'theme.js'%}"></script>
+  <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'color-modes.js'%}"></script>
+
+
+  <script>
+    function myFunction() {
+      // Declare variables 
+      var input, filter, table, tr, td, i, j, visible;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        visible = false;
+        /* Obtenemos todas las celdas de la fila, no sólo la primera */
+        td = tr[i].getElementsByTagName("td");
+        for (j = 0; j < td.length; j++) {
+          if (td[j] && td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            visible = true;
+          }
+        }
+        if (visible === true) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+
+
+
+
+
+  <script>
+    var exampleModal = document.getElementById('exampleModal')
+    exampleModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget
+      var id = button.getAttribute('data-id')
+      var nombre = button.getAttribute('data-nombre')
+
+      var modalTitle = exampleModal.querySelector('.modal-title')
+      var modalBody = exampleModal.querySelector('.modal-body')
+      var modalfooter = exampleModal.querySelector('.modal-footer')
+
+      //modalTitle.textContent = 'New message to ' + recipient
+      modalTitle.textContent = 'Eliminar el promotor'
+      modalBody.textContent = 'Se dispone a eliminar el promotor : ' + nombre
+      modalfooter.innerHTML = '<a href="/delcodifi/' + id + '" button type=button class="btn btn-danger">Eliminar</a>' + '<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>'
+
+
+    })
+
+  </script>
+
+
+
+  <script>
+    function actua(dato1) {
+      document.getElementById('id_descripcionf').value = dato1;
+    }
+  </script>
+
+
+
+
+</body>
+
+</html>

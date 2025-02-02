@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from gestion.models import venta, pedido
+from gestion.models import venta, pedido, promot
 from almacen.models import inversion, almacenb
 from cosmetic.views import cantalm, pront
+from sistema.formulario import promtf
 
 
 # Create your views here.
@@ -21,3 +22,22 @@ def configdel(request):
     inversion.objects.all().delete()
     almacenb.objects.all().delete()
     return redirect(config)
+
+
+def codifica(request):
+    promo = promot.objects.all()
+    formp = promtf()
+    return render(request, "codifica.html", {"promoSW": promo, "formpSW": formp})
+
+
+def addcodifi(request):
+    nombr = request.GET["NombF"]
+    sal = promot.objects.create(Nombre=nombr)
+    sal.save()
+    return redirect("/codifica")
+
+
+def delcodifi(request, id):
+    sal = promot.objects.get(pk=id)
+    sal.delete()
+    return redirect("/codifica")
