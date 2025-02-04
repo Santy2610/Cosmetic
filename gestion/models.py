@@ -18,7 +18,7 @@ class pedido(models.Model):
 
 
 class promot(models.Model):
-    Nombre = models.CharField(max_length=255)
+    nombre = models.CharField(max_length=255)
 
 
 class articulo(models.Model):

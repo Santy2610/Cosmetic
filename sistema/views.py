@@ -27,12 +27,12 @@ def configdel(request):
 def codifica(request):
     promo = promot.objects.all()
     formp = promtf()
-    return render(request, "codifica.html", {"promoSW": promo, "formpSW": formp})
+    return render(request, "codifica.html", {"promoSW": promo, "formpSW": formp, "conal": cantalm})
 
 
 def addcodifi(request):
     nombr = request.GET["NombF"]
-    sal = promot.objects.create(Nombre=nombr)
+    sal = promot.objects.create(nombre=nombr)
     sal.save()
     return redirect("/codifica")
 

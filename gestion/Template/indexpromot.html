@@ -27,14 +27,9 @@
 
               <div class="row">
                 <div class="col-9">
-                  <h3>Ventas: {{dateSW}}</h3>
+                  <h3>Promotor : {{NomSW}}</h3>
                 </div>
-                <div class="col-2">
-                  {{formSW.calef}}
-                </div>
-                <div class="col-1">
-                  <input type="submit" class="btn btn-success  float-rigth" value=" Ir ">
-                </div>
+
 
               </div>
             </form>
@@ -51,7 +46,10 @@
           <div class="card-body">
             <div class="row">
               <div class="col-6">
-                Total de ganacia dia: $ {{sugSW}} - libre: $ {{libSW|floatformat:2}}
+                <form action="/indexpromot">
+                  Promotor: {{formF.lista}}
+                  <input type="submit" class="btn btn-success btn-sm float-rigth" value=" Mostrar ">
+                </form>
               </div>
               <div class="col-4">
                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtrar por descripción">
@@ -65,7 +63,7 @@
                       <table>
                         <thead class="thead-dark btn-danger">
                           <tr>
-                            <td width="650">Producto vendido</td>
+                            <td width="650">Producto negociado</td>
                             <td width="150">Cantidad</td>
                             <td></td>
                           </tr>

@@ -14,7 +14,7 @@ class pedidoAdmin(admin.ModelAdmin):
 
 
 class promotAdmin(admin.ModelAdmin):
-    list_display = ("Nombre",)
+    list_display = ("nombre",)
 
 
 class articuloAdmin(admin.ModelAdmin):

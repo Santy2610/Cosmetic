@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from cosmetic.views import cantalm, pront
 from datetime import date, datetime
-from gestion.formulario import vistvent, pedidof
-from gestion.models import venta, pedido
+from gestion.formulario import vistvent, pedidof, buspromt
+from gestion.models import venta, pedido, promot
 from almacen.models import almacenb
 from django.db.models import Sum
 import locale
@@ -131,4 +131,9 @@ def reportpedido(request):
 
 
 def indexpromot(request):
-    return render(request, "indexpromot.html")
+    if request.GET["lista"] == "none":
+        nom = ""
+    else:
+        nom = request.GET["lista"]
+    formpro = buspromt()
+    return render(request, "indexpromot.html", {"NomSW": nom, "conal": cantalm, "formF": formpro})
