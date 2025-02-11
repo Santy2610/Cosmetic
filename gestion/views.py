@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from cosmetic.views import cantalm, pront
 from datetime import date, datetime
 from gestion.formulario import vistvent, pedidof, buspromt
-from gestion.models import venta, pedido, promot
+from gestion.models import venta, pedido, promot, articulo
 from almacen.models import almacenb
 from django.db.models import Sum
 import locale
@@ -89,7 +89,7 @@ def reportvent(request, date):
 def indexpedid(request):
     formp = pedidof()
     alma = almacenb.objects.filter(existencia=0).values(
-        "descripcion").order_by("descripcion")
+        'descripcion').order_by('descripcion')
     pedid = pedido.objects.all()
     return render(request, "indexpedido.html", {"almaSW": alma, "pedidSW": pedid, "formpSW": formp, "conal": cantalm, "clucSW": pront})
 
@@ -133,7 +133,28 @@ def reportpedido(request):
 def indexpromot(request):
     if request.GET["lista"] == "none":
         nom = ""
+        alma = almacenb.objects.filter(
+            existencia__gt=0).order_by('descripcion')
+        formpro = buspromt()
+        return render(request, "indexpromot.html", {"NomSW": nom, "conal": cantalm, "formF": formpro, "almaSW": alma, "clucSW": pront})
     else:
         nom = request.GET["lista"]
-    formpro = buspromt()
-    return render(request, "indexpromot.html", {"NomSW": nom, "conal": cantalm, "formF": formpro})
+        nombr = promot.objects.get(nombre=nom)
+        prod = articulo.objects.filter(idNombre=nombr).values('descripcion').order_by(
+            'descripcion').annotate(total=Sum('cantidad'))
+        alma = almacenb.objects.filter(
+            existencia__gt=0).order_by('descripcion')
+        formpro = buspromt()
+        return render(request, "indexpromot.html", {"NomSW": nom, "conal": cantalm, "formF": formpro, "prodSW": prod, "almaSW": alma, "clucSW": pront})
+
+
+def addpartic(request, lista, id):
+    if lista != "none":
+        fechar = date.today()
+        nombr = promot.objects.get(nombre=lista)
+        loc = almacenb.objects.get(pk=id)
+        descrip = loc.descripcion
+        prod = articulo.objects.create(
+            idNombre=nombr, fecha=fechar, descripcion=descrip, cantidad=1, idalmac=id)
+        prod.save()
+    return redirect("/indexpromot?lista="+lista)

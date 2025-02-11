@@ -27,3 +27,4 @@ class articulo(models.Model):
     fecha = models.DateField()
     descripcion = models.CharField(max_length=150)
     cantidad = models.IntegerField()
+    idalmac = models.IntegerField()

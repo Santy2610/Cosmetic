@@ -18,7 +18,7 @@ class promotAdmin(admin.ModelAdmin):
 
 
 class articuloAdmin(admin.ModelAdmin):
-    list_display = ("fecha", "descripcion", "cantidad")
+    list_display = ("fecha", "descripcion", "cantidad", "idalmac")
 
 
 admin.site.register(venta, ventaAdmin)
