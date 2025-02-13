@@ -150,11 +150,25 @@ def indexpromot(request):
 
 def addpartic(request, lista, id):
     if lista != "none":
-        fechar = date.today()
-        nombr = promot.objects.get(nombre=lista)
-        loc = almacenb.objects.get(pk=id)
-        descrip = loc.descripcion
-        prod = articulo.objects.create(
-            idNombre=nombr, fecha=fechar, descripcion=descrip, cantidad=1, idalmac=id)
-        prod.save()
+        canR = request.GET["cant"]
+        if canR != "":
+            cantr = int(canR)
+            for i in range(cantr):
+                fechar = date.today()
+                nombr = promot.objects.get(nombre=lista)
+                loc = almacenb.objects.get(pk=id)
+                descrip = loc.descripcion
+                prod = articulo.objects.create(
+                    idNombre=nombr, fecha=fechar, descripcion=descrip, cantidad=1, idalmac=id)
+                prod.save()
+    return redirect("/indexpromot?lista="+lista)
+
+
+def delpartic(request, lista, id):
+    if lista != "none":
+        artic = articulo.objects.filter(descripcion=id).all()
+        for artic in artic:
+            loc = artic.id
+        ar = articulo.objects.get(pk=loc)
+        ar.delete()
     return redirect("/indexpromot?lista="+lista)

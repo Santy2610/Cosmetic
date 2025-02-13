@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from cosmetic.views import principal
 from almacen.views import indexalm, indexinv, invadd, invdell, invupdate, almadd, almadel, listalmacen, cal, invt, invereport
-from gestion.views import indexventa, addventa, dismventa, reportvent, indexpedid, addpedido, sumpedido, delpedido, addpedidoc, reportpedido, indexpromot, addpartic
+from gestion.views import indexventa, addventa, dismventa, reportvent, indexpedid, addpedido, sumpedido, delpedido, addpedidoc, reportpedido, indexpromot, addpartic, delpartic
 from sistema.views import config, configdel, codifica, addcodifi, delcodifi
 
 urlpatterns = [
@@ -55,7 +55,9 @@ urlpatterns = [
     path('delcodifi/<id>', delcodifi),
 
     path('indexpromot', indexpromot),
-    path('addpartic/<lista>/<id>', addpartic)
+    path('addpartic/<lista>/<id>', addpartic),
+    path('delpartic/<lista>/<id>', delpartic)
+
 
 
 ]

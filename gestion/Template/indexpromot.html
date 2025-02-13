@@ -80,7 +80,8 @@
                             <tr>
                               <td width="780">{{prodSW.descripcion}}</td>
                               <td width="90">{{prodSW.total}} <!--{{venSW.idalma}}--></td>
-                              <td><a href="#" button type=button class="btn btn-warning btn-sm">>></a>
+                              <td><a href="/delpartic/{{NomSW}}/{{prodSW.descripcion}}" button type=button
+                                  class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
                               </td>
                             </tr>
                             {%endfor%}
@@ -99,7 +100,8 @@
                       <table>
                         <thead class="thead-dark">
                           <tr>
-                            <td width="180"> </td>
+                            <td width="160"> </td>
+                            <td width="250"> </td>
                             <td width="780">Producto en almacen</td>
                             <td width="200">Existencia</td>
                           </tr>
@@ -114,20 +116,27 @@
                           <tbody>
                             {%for almaSW in almaSW%}
                             <tr>
-                              <form action="/addpartic/{{NomSW}}/{{almaSW.id}}">
-                                <td><input type="submit" button type=button class="btn btn-success btn-sm" value="<<">
-                                <td width="10">
-                                </td>
-                              </form>
-                              <td width="500">{{almaSW.descripcion}}</td>
-                              <td width="90">{{almaSW.existencia}}</td>
+                              <td width="10">
+                                <form action="/addpartic/{{NomSW}}/{{almaSW.id}}">
+                              <td><input type="submit" button type=button class="btn btn-success btn-sm" value="<<">
 
-                            </tr>
-                            {%endfor%}
-                          </tbody>
-                        </table>
+                              </td>
+                              <td>
+                              <td width="10">
+                                <input type="number" id="number" name="cant" min="1" max="{{almaSW.existencia}}"
+                                  placeholder="0" style="width: 4em;">
+                              </td>
                     </td>
+                    </form>
+                    <td width="500">{{almaSW.descripcion}}</td>
+                    <td width="90">{{almaSW.existencia}}</td>
+
                   </tr>
+                  {%endfor%}
+                  </tbody>
+                </table>
+                </td>
+                </tr>
                 </table>
               </div>
             </div>
