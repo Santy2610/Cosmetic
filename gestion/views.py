@@ -88,8 +88,7 @@ def reportvent(request, date):
 
 def indexpedid(request):
     formp = pedidof()
-    alma = almacenb.objects.filter(existencia=0).values(
-        'descripcion').order_by('descripcion')
+    alma = almacenb.objects.order_by('descripcion')
     pedid = pedido.objects.all()
     return render(request, "indexpedido.html", {"almaSW": alma, "pedidSW": pedid, "formpSW": formp, "conal": cantalm, "clucSW": pront})
 

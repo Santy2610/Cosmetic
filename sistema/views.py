@@ -27,7 +27,7 @@ def configdel(request):
 def codifica(request):
     promo = promot.objects.all()
     formp = promtf()
-    return render(request, "codifica.html", {"promoSW": promo, "formpSW": formp, "conal": cantalm})
+    return render(request, "codifica.html", {"promoSW": promo, "formpSW": formp, "conal": cantalm, "clucSW": pront})
 
 
 def addcodifi(request):
