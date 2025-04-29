@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=Cosmetic
-Comment=Cosmetic
-Exec=firefox http://localhost:8035
-Terminal=false
-Type=Application
-Icon=/var/www/html/cosmetic/cosmetic/static/file.jpeg
