@@ -12,7 +12,9 @@ import locale
 
 def indexalm(request, dato, valor):
     inver = inversion.objects.get(pk=dato)
-    alma = almacenb.objects.filter(idinver=inver).order_by('descripcion')
+    fechaI = inversion.fecha
+    alma = almacenb.objects.filter(
+        idinver__exact=inver).order_by('descripcion')
     listado = almacenb.objects.values('descripcion').order_by(
         'descripcion').annotate(sun=Sum('cantidad'))
     formal = almacenf()
@@ -138,10 +140,10 @@ def invt(request):
     alm = almacenb.objects.all()
     tot = 0
     tot2 = 0
-    for alm in alm:
-        tot = tot+(alm.presioc*alm.cantidad)
-        tot2 = tot2+(alm.presiob*alm.cantidad)
-    inv = inversion.objects.get(pk=alm.idinver_id)
+    for almb in alm:
+        tot = tot+(almb.presioc*almb.cantidad)
+        tot2 = tot2+(almb.presiob*almb.cantidad)
+    inv = inversion.objects.get(pk=almb.idinver_id)
     inv.montoinver = tot
     inv.montoganancia = tot2
     inv.libre = inv.montoganancia-inv.montoinver
